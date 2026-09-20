@@ -1,6 +1,6 @@
 # figuras_AL
 
-Projeto base em C++20 com SFML 3.1 para experimentar figuras geométricas.
+Projeto base em C++20 com SFML 3.1 para figuras geométricas.
 
 ## Estrutura
 
