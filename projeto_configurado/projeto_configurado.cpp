@@ -11,14 +11,13 @@ float tami_circ = 100.0f;
 
 float posiY = 100.0f;
 float posiX = 100.0f;
+float roda = 0.0f;
 
 void GeraCirc() {
 
     CircleShape circ(tami_circ);
     circ.setPosition(Vector2f(posiX, posiY));
     circ.setFillColor(Color::Green);
-
-    janela.clear(Color::Blue);
 
     janela.draw(circ);
 
