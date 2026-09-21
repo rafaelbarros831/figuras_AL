@@ -1,10 +1,16 @@
 #include <iostream>
 #include<SFML/Graphics.hpp>
+#include<vector>
 
 using namespace sf;
 using namespace std;
 
 RenderWindow janela(VideoMode({600,550}), "Teste:");
+
+vector <RectangleShape> vLinhas;
+vector <RectangleShape> vColunas;
+
+int mediX = 10;
 
 bool Gs;
 float tami_circ = 100.0f;
@@ -12,6 +18,8 @@ float tami_circ = 100.0f;
 float posiY = 100.0f;
 float posiX = 100.0f;
 float roda = 0.0f;
+
+
 
 void GeraCirc() {
 
@@ -53,12 +61,28 @@ void GeraCirc() {
 
 }
 
+void Matriz_ret(int ln, int cn) {
+
+    for (int i = 0; i < ln; i++) {
+        
+        for (int c = 0; c < cn; c++) {
+            mediX += 30;
+            RectangleShape quadn(Vector2f(20.0f, 20.0f));
+            quadn.setFillColor(Color::Green);
+            quadn.setPosition(Vector2f((100.0f + mediX), 100.0f));
+
+            vLinhas.push_back(quadn);
+            janela.draw(vLinhas[c]);
+        }
+    }
+}
+
 int main(){
 
-    while(janela.isOpen() == true){
+    while (janela.isOpen() == true) {
         while (optional evento = janela.pollEvent()) {
 
-            if (evento ->is<Event::Closed>()) {
+            if (evento->is<Event::Closed>()) {
                 janela.close();
             }
         }
@@ -76,7 +100,14 @@ int main(){
             GeraCirc();
         }
 
-        janela.display();
+        if (Keyboard::isKeyPressed(Keyboard::Key::J)) {
+            int a = 10, b = 10;
+            Matriz_ret(a, b);
+        }
+
+        cout << vLinhas.size() << "  " << vColunas.size() << endl;
+
+            janela.display();
     }
 
     return 0;
