@@ -7,10 +7,6 @@ using namespace std;
 
 RenderWindow janela(VideoMode({600,550}), "Teste:");
 
-vector <RectangleShape> vLinhas;
-vector <RectangleShape> vColunas;
-
-int mediX = 10;
 
 bool Gs;
 float tami_circ = 100.0f;
@@ -19,6 +15,11 @@ float posiY = 100.0f;
 float posiX = 100.0f;
 float roda = 0.0f;
 
+float posiquadX = 100.0f;
+float posiquadY = 100.0f;
+bool controlquad;
+float tamquadX = 100.0f;
+float tamquadY = 100.0f;
 
 
 void GeraCirc() {
@@ -61,21 +62,61 @@ void GeraCirc() {
 
 }
 
-void Matriz_ret(int ln, int cn) {
+void Geraquad() {
+    RectangleShape quad(Vector2f(tamquadX, tamquadY));
+	quad.setPosition(Vector2f(posiquadX, posiquadY));
+    quad.setFillColor(Color::Red);
+	janela.draw(quad);
 
-    for (int i = 0; i < ln; i++) {
-        
-        for (int c = 0; c < cn; c++) {
-            mediX += 30;
-            RectangleShape quadn(Vector2f(20.0f, 20.0f));
-            quadn.setFillColor(Color::Green);
-            quadn.setPosition(Vector2f((100.0f + mediX), 100.0f));
-
-            vLinhas.push_back(quadn);
-            janela.draw(vLinhas[c]);
-        }
+    if (Keyboard::isKeyPressed(Keyboard::Key::Space) && tamquadX > 10.0f && tamquadY > 10.0f) {
+        tamquadX -= 0.01f;
+        tamquadY -= 0.01f;
+        quad.setSize(Vector2f(tamquadX, tamquadY));
     }
+    else if (Keyboard::isKeyPressed(Keyboard::Key::S) && tamquadX < 500.0f && tamquadY < 500.0f) {
+		tamquadX += 0.01f;
+        tamquadY += 0.01f;
+        quad.setSize(Vector2f(tamquadX, tamquadY));
+    }
+    else if (Keyboard::isKeyPressed(Keyboard::Key::Q) && tamquadX > 10.0f) {
+        tamquadX -= 0.01f;
+		quad.setSize(Vector2f(tamquadX, tamquadY));
+    }
+    else if (Keyboard::isKeyPressed(Keyboard::Key::E) && tamquadX < 500.0f) {
+        tamquadX += 0.01f;
+        quad.setSize(Vector2f(tamquadX, tamquadY));
+    }
+    else if (Keyboard::isKeyPressed(Keyboard::Key::F) && tamquadY > 10.0f) {
+        tamquadY -= 0.01f;
+        quad.setSize(Vector2f(tamquadX, tamquadY));
+    }
+    else if (Keyboard::isKeyPressed(Keyboard::Key::G) && tamquadY < 500.0f) {
+        tamquadY += 0.01f;
+        quad.setSize(Vector2f(tamquadX, tamquadY));
+    }
+    else if (Keyboard::isKeyPressed(Keyboard::Key::Up) && posiquadY > -20.0f) {
+        posiquadY -= 0.1f;
+		quad.setPosition(Vector2f(posiquadX, posiquadY));
+    }
+    else if (Keyboard::isKeyPressed(Keyboard::Key::Down) && posiquadY < 520.0f) {
+        posiquadY += 0.1f;
+        quad.setPosition(Vector2f(posiquadX, posiquadY));
+	}
+    else if (Keyboard::isKeyPressed(Keyboard::Key::Left) && posiquadX > -10.0f) {
+        posiquadX -= 0.1f;
+        quad.setPosition(Vector2f(posiquadX, posiquadY));
+	}
+    else if (Keyboard::isKeyPressed(Keyboard::Key::Right) && posiquadX < 560.0f) {
+        posiquadX += 0.1f;
+        quad.setPosition(Vector2f(posiquadX, posiquadY));
+    }
+
+
+
+
 }
+
+
 
 int main(){
 
@@ -89,6 +130,8 @@ int main(){
 
         janela.clear(Color::Blue);
 
+       
+
         if (Keyboard::isKeyPressed(Keyboard::Key::A)) {
             Gs = true;
         }
@@ -100,14 +143,19 @@ int main(){
             GeraCirc();
         }
 
-        if (Keyboard::isKeyPressed(Keyboard::Key::J)) {
-            int a = 10, b = 10;
-            Matriz_ret(a, b);
+        if (Keyboard::isKeyPressed(Keyboard::Key::Z)) {
+            controlquad = true;
+        }
+        else if (Keyboard::isKeyPressed(Keyboard::Key::X)) {
+            controlquad = false;
+        }
+        if (controlquad != false) {
+            Geraquad();
         }
 
-        cout << vLinhas.size() << "  " << vColunas.size() << endl;
+		cout << controlquad << endl;
 
-            janela.display();
+           janela.display();
     }
 
     return 0;

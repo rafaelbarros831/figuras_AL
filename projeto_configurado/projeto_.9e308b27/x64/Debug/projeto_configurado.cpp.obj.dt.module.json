@@ -1,0 +1,14 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "projeto_.9e308b27\\x64\\Debug\\projeto_configurado.obj",
+            "outputs": [
+                "projeto_.9e308b27\\x64\\Debug\\projeto_configurado.cpp.obj.dt.module.json",
+                "projeto_.9e308b27\\x64\\Debug\\projeto_configurado.cpp.obj.dt.d.json"
+            ],
+            "requires": []
+        }
+    ]
+}
