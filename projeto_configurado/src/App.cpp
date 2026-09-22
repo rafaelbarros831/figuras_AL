@@ -28,7 +28,8 @@ void App::processEvents()
 
         if (event->is<sf::Event::KeyPressed>())
         {
-            const auto* tecla = event->getIf<sf::Event::KeyPressed>();
+            const auto* tecla =
+                event->getIf<sf::Event::KeyPressed>();
 
             if (tecla->code == sf::Keyboard::Key::Add)
             {
@@ -41,6 +42,27 @@ void App::processEvents()
             {
                 quadrado.aplicarMatriz(
                     Transformacao::escala(0.9)
+                );
+            }
+
+            if (tecla->code == sf::Keyboard::Key::R)
+            {
+                quadrado.aplicarMatrizCentrada(
+                    Transformacao::reflexaoX()
+                );
+            }
+
+            if (tecla->code == sf::Keyboard::Key::Left)
+            {
+                quadrado.aplicarMatrizCentrada(
+                    Transformacao::rotacao(-15.0)
+                );
+            }
+
+            if (tecla->code == sf::Keyboard::Key::Right)
+            {
+                quadrado.aplicarMatrizCentrada(
+                    Transformacao::rotacao(15.0)
                 );
             }
         }

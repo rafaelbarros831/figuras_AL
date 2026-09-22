@@ -11,6 +11,8 @@ public:
 
     void addPonto(const Ponto& ponto);
     void aplicarMatriz(const Matriz& matriz);
+    void aplicarMatrizCentrada(const Matriz& matriz);
+    void transladar(double dx, double dy);
 
     const std::vector<Ponto>& getPontos() const
     {
@@ -18,5 +20,7 @@ public:
     }
 
 private:
+    Ponto calcularCentro() const;
+
     std::vector<Ponto> pontos;
 };
