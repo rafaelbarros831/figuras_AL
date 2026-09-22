@@ -233,5 +233,3 @@ As transformações previstas são:
 
 ⭐ Projeto desenvolvido para fins acadêmicos.
 ````
-
-**Observação:** mantive os links como caminhos relativos (`./projeto_configurado/...`), porque assim eles funcionam diretamente dentro do GitHub sem depender do nome de usuário ou da URL completa do repositório.
