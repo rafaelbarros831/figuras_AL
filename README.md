@@ -232,4 +232,3 @@ As transformações previstas são:
 ---
 
 ⭐ Projeto desenvolvido para fins acadêmicos.
-````
