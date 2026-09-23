@@ -11,14 +11,13 @@ vector <RectangleShape> vLinhas;
 
 int linhas, colunas;
 
-int mediX = 10;
+float mediX, mediY;
 
 bool Gs, Ms;
 float tami_circ = 100.0f;
 
 float posiY = 100.0f;
 float posiX = 100.0f;
-
 
 
 void GeraCirc() {
@@ -65,18 +64,18 @@ void Matriz_ret(int ln, int cn) {
 
     vLinhas.clear();
     
-    float mediY = 100;
+      mediY = 0.0f;
 
     for (int i = 0; i < ln; i++) {
 
-        mediX = 10;
+        mediX = 10.0f;
         
         for (int c = 0; c < cn; c++) {
             mediX += 30;
             RectangleShape quadn(Vector2f(20.0f, 20.0f));
             quadn.setFillColor(Color::Green);
 
-            quadn.setPosition(Vector2f((100.0f + mediX), mediY));
+            quadn.setPosition(Vector2f(mediX, (10.0f + mediY)));
 
             vLinhas.push_back(quadn);
             janela.draw(vLinhas.back());
@@ -85,14 +84,23 @@ void Matriz_ret(int ln, int cn) {
     }
 }
 
+void Quant(){
+  cout << "Linhas:";
+  cin >> linhas;
+
+  cout << "Colunas:";
+  cin >> colunas;
+}
+
 
 int main(){
 
-    cout << "Linhas:";
-    cin >> linhas;
+    Quant();
 
-    cout << "Colunas:";
-    cin >> colunas;
+    while (linhas > 20 || colunas > 20) {
+        cout << "O Programa nao aceita valores maiores do que 20.\n";
+        Quant();
+    }
 
     while (janela.isOpen() == true) {
         while (optional evento = janela.pollEvent()) {
@@ -109,6 +117,7 @@ int main(){
         }
         else if (Keyboard::isKeyPressed(Keyboard::Key::D)) {
             Gs = false;
+            Ms = false;
         }
 
         if (Gs != false) {
