@@ -8,16 +8,16 @@ using namespace std;
 RenderWindow janela(VideoMode({600,550}), "Teste:");
 
 vector <RectangleShape> vLinhas;
-vector <RectangleShape> vColunas;
+
+int linhas, colunas;
 
 int mediX = 10;
 
-bool Gs;
+bool Gs, Ms;
 float tami_circ = 100.0f;
 
 float posiY = 100.0f;
 float posiX = 100.0f;
-float roda = 0.0f;
 
 
 
@@ -63,21 +63,36 @@ void GeraCirc() {
 
 void Matriz_ret(int ln, int cn) {
 
+    vLinhas.clear();
+    
+    float mediY = 100;
+
     for (int i = 0; i < ln; i++) {
+
+        mediX = 10;
         
         for (int c = 0; c < cn; c++) {
             mediX += 30;
             RectangleShape quadn(Vector2f(20.0f, 20.0f));
             quadn.setFillColor(Color::Green);
-            quadn.setPosition(Vector2f((100.0f + mediX), 100.0f));
+
+            quadn.setPosition(Vector2f((100.0f + mediX), mediY));
 
             vLinhas.push_back(quadn);
-            janela.draw(vLinhas[c]);
+            janela.draw(vLinhas.back());
         }
+        mediY += 30;
     }
 }
 
+
 int main(){
+
+    cout << "Linhas:";
+    cin >> linhas;
+
+    cout << "Colunas:";
+    cin >> colunas;
 
     while (janela.isOpen() == true) {
         while (optional evento = janela.pollEvent()) {
@@ -101,11 +116,14 @@ int main(){
         }
 
         if (Keyboard::isKeyPressed(Keyboard::Key::J)) {
-            int a = 10, b = 10;
-            Matriz_ret(a, b);
+			Ms = true;
         }
 
-        cout << vLinhas.size() << "  " << vColunas.size() << endl;
+        if (Ms == true) {
+            Matriz_ret(linhas, colunas);
+        }
+
+        cout << vLinhas.size()<< endl;
 
             janela.display();
     }
