@@ -68,3 +68,118 @@ int main() {
 
     return 0;
 }
+```
+---
+<br><br>
+## Interface Grafica
+```cpp
+#include <SFML/Graphics.hpp>
+#include <vector>
+#include <cmath>
+
+const float PI = 3.14159265359f;
+
+struct Ponto {
+    float x, y;
+};
+
+// Multiplicação de Ponto 2D por Matriz 2x2
+Ponto aplicarMatriz(const Ponto& p, float m00, float m01, float m10, float m11) {
+    return {
+        (m00 * p.x) + (m01 * p.y),
+        (m10 * p.x) + (m11 * p.y)
+    };
+}
+
+// Transformações
+void aplicarEscala(std::vector<Ponto>& vertices, float fator) {
+    for (auto& v : vertices) {
+        v = aplicarMatriz(v, fator, 0.0f, 0.0f, fator);
+    }
+}
+
+void aplicarRotacao(std::vector<Ponto>& vertices, float anguloGraus) {
+    float rad = anguloGraus * (PI / 180.0f);
+    float cosA = std::cos(rad);
+    float sinA = std::sin(rad);
+    for (auto& v : vertices) {
+        v = aplicarMatriz(v, cosA, -sinA, sinA, cosA);
+    }
+}
+
+void aplicarReflexaoEixoX(std::vector<Ponto>& vertices) {
+    for (auto& v : vertices) {
+        v = aplicarMatriz(v, 1.0f, 0.0f, 0.0f, -1.0f);
+    }
+}
+
+void aplicarReflexaoEixoY(std::vector<Ponto>& vertices) {
+    for (auto& v : vertices) {
+        v = aplicarMatriz(v, -1.0f, 0.0f, 0.0f, 1.0f);
+    }
+}
+
+int main() {
+    // SFML 3.0: Utiliza sf::VideoMode({largura, altura})
+    sf::RenderWindow window(sf::VideoMode({800, 600}), "Atividade - SFML 3.0");
+    window.setFramerateLimit(60);
+
+    // Vértices do triângulo na origem (0,0)
+    std::vector<Ponto> figuraLocal = {
+        { 0.0f, -80.0f},
+        {-60.0f,  60.0f},
+        { 60.0f,  60.0f}
+    };
+
+    sf::Vector2f centroTela(400.0f, 300.0f);
+
+    while (window.isOpen()) {
+        // SFML 3.0: Tratamento de eventos com std::optional
+        while (const auto event = window.pollEvent()) {
+            if (event->is<sf::Event::Closed>()) {
+                window.close();
+            }
+            else if (const auto* keyPressed = event->getIf<sf::Event::KeyPressed>()) {
+                // SFML 3.0: Usa sf::Keyboard::Key::...
+                if (keyPressed->code == sf::Keyboard::Key::Up || keyPressed->code == sf::Keyboard::Key::Add) {
+                    aplicarEscala(figuraLocal, 1.1f);
+                }
+                if (keyPressed->code == sf::Keyboard::Key::Down || keyPressed->code == sf::Keyboard::Key::Hyphen) {
+                    aplicarEscala(figuraLocal, 0.9f);
+                }
+                if (keyPressed->code == sf::Keyboard::Key::Left) {
+                    aplicarRotacao(figuraLocal, -15.0f);
+                }
+                if (keyPressed->code == sf::Keyboard::Key::Right) {
+                    aplicarRotacao(figuraLocal, 15.0f);
+                }
+                if (keyPressed->code == sf::Keyboard::Key::H) {
+                    aplicarReflexaoEixoY(figuraLocal);
+                }
+                if (keyPressed->code == sf::Keyboard::Key::V) {
+                    aplicarReflexaoEixoX(figuraLocal);
+                }
+            }
+        }
+
+        window.clear(sf::Color(30, 30, 30));
+
+        // Desenhando no SFML 3.0
+        sf::VertexArray triangulo(sf::PrimitiveType::Triangles, figuraLocal.size());
+
+        for (std::size_t i = 0; i < figuraLocal.size(); ++i) {
+            triangulo[i].position = {
+                figuraLocal[i].x + centroTela.x,
+                figuraLocal[i].y + centroTela.y
+            };
+            triangulo[i].color = sf::Color::Yellow;
+        }
+
+        window.draw(triangulo);
+        window.display();
+    }
+
+    return 0;
+}
+```
+
