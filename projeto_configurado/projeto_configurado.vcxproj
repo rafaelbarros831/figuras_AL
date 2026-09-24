@@ -173,20 +173,30 @@ sfml-network.lib;</AdditionalDependencies>
   <ItemGroup>
     <ClCompile Include="projeto_configurado.cpp" />
     <ClCompile Include="src\App.cpp" />
+    <ClCompile Include="src\Cubo.cpp" />
     <ClCompile Include="src\Figura.cpp" />
     <ClCompile Include="src\Matriz.cpp" />
+    <ClCompile Include="src\Matriz3.cpp" />
     <ClCompile Include="src\Ponto.cpp" />
+    <ClCompile Include="src\Ponto3D.cpp" />
     <ClCompile Include="src\Quadrado.cpp" />
+    <ClCompile Include="src\Retangulo.cpp" />
     <ClCompile Include="src\Transformacao.cpp" />
+    <ClCompile Include="src\Transformacao3D.cpp" />
     <ClCompile Include="src\Triangulo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\App.hpp" />
+    <ClInclude Include="include\Cubo.hpp" />
     <ClInclude Include="include\Figura.hpp" />
     <ClInclude Include="include\Matriz.hpp" />
+    <ClInclude Include="include\Matriz3.hpp" />
     <ClInclude Include="include\Ponto.hpp" />
+    <ClInclude Include="include\Ponto3D.hpp" />
     <ClInclude Include="include\Quadrado.hpp" />
+    <ClInclude Include="include\Retangulo.hpp" />
     <ClInclude Include="include\Transformacao.hpp" />
+    <ClInclude Include="include\Transformacao3D.hpp" />
     <ClInclude Include="include\Triangulo.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

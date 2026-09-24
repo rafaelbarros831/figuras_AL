@@ -9,6 +9,11 @@ void Figura::addPonto(const Ponto& ponto)
 	pontos.push_back(ponto);
 }
 
+void Figura::limparPontos()
+{
+	pontos.clear();
+}
+
 void Figura::aplicarMatriz(const Matriz& matriz)
 {
 	for (auto& ponto : pontos)

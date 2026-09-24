@@ -19,6 +19,11 @@ public:
         return pontos;
     }
 
+protected:
+    // Permite que figuras com geometria mutavel (ex.: Retangulo, que
+    // muda de tamanho/posicao em tempo real) reconstruam seus pontos.
+    void limparPontos();
+
 private:
     Ponto calcularCentro() const;
 
