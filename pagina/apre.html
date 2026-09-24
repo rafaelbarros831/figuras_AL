@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação</title>
+</head>
+<body bgcolor="#000080">
+
+    <h1><font color="cyan" style="font-family: Arial, sans-serif;" align="left">FrameWorks e mais...</font></h1>
+    <br>
+
+        <ul>
+            <li><font color="white" style="font-family: Arial, sans-serif;">SFML</font></li>
+            <br>
+            <li><font color="white" style="font-family: Arial, sans-serif;">C++</font></li>
+            <br>
+        </ul>
+
+    <h3><font color="white" style="font-family: Arial, sans-serif;">Como a SFML Funciona:</font></h3>
+    
+    <p><font color="white" style="font-family: Arial, sans-serif;">A SFML abstrai a complexidade do hardware gráfico (via OpenGL) e organiza a aplicação em cinco módulos principais: System, Window, Graphics, Audio e Network.</font></p>
+    <p align="justify"><font color="white" style="font-family: Arial, sans-serif;"><b>Game Loop:</b> A aplicação executa em um laço contínuo estruturado em três etapas:</p>
+
+    <ol>
+        <li><font color="white" style="font-family: Arial, sans-serif;">Processamento de Eventos: Captura de entradas de teclado, mouse e janela.</font></li>
+        <br>
+        <li><font color="white" style="font-family: Arial, sans-serif;">Atualização do Estado (Update): Aplicação de transformações geométricas, física e lógica de negócios.</font></li>
+        <br>
+        <li><font color="white" style="font-family: Arial, sans-serif;">Renderização (Render): Limpeza do buffer (window.clear()), desenho dos objetos (window.draw()) e troca de buffers de renderização (window.display()).</font></li>
+    </ol>
+
+    <br>
+
+    <h3><font color="white" style="font-family: Arial, sans-serif;">Conceitos de Álgebra Linear Aplicados na <b>SFML</b>:</font></h3>
+
+    <p><font color="white" style="font-family: Arial, sans-serif;">A SFML utiliza internamente a estrutura sf::Transform, que representa uma matriz de transformação afim 3 x 3 para manipular objetos no espaço 2D.</font></p>
+    <p><font color="white" style="font-family: Arial, sans-serif;">Essa matriz permite realizar operações como translação, rotação e escala sobre os objetos. Para aplicar rotação, escala e translação utilizando multiplicações de matrizes, a SFML utiliza coordenadas homogêneas. Um ponto 2D (x, y) é estendido para um vetor 3D(x, y, 1) transposto.</font></p>
+    <p><font color="white" style="font-family: Arial, sans-serif;">A matriz geral de transformação afim na SFML é estruturada da seguinte forma:</font></p>
+    <br>
+
+    <center><img src = "Matr.png" width="10%" height="10%"></center>
+
+    <br>
+
+    <p><font color="white" style="font-family: Arial, sans-serif;">Onde:</font></p>
+    <ul>
+        <li><font color="white" style="font-family: Arial, sans-serif;">(c, f) representam os deslocamentos de translação.</font></li>
+        <br>
+        <li><font color="white" style="font-family: Arial, sans-serif;">A submatriz 2 x 2  superior esquerda (a, b, d, e) combina escala, rotação e cisalhamento. </font></li>
+        <br>
+        
+    </ul>
+
+    <br>
+
+    <h3><font color="white" style="font-family: Arial, sans-serif;">As Transformações Geométricas 2D</font></h3>
+
+    <p><font color="white" style="font-family: Arial, sans-serif;">No desenvolvimento gráfico com C++ e SFML, qualquer alteração visual na posição, tamanho ou orientação de um objeto na tela é realizada por meio de transformações geométricas afins. Na álgebra linear, essas transformações usam matrizes para mapear as coordenadas originais de um vetor de vértices para novas posições no espaço bidimensional.Para que todas essas operações possam ser combinadas através de simples multiplicações de matrizes, a SFML utiliza o conceito de coordenadas homogêneas, onde um ponto no plano 2D representado por (x, y) passa a ser tratado como um vetor tridimensional (x, y, 1).</font></p>
+
+    <br>
+
+    <h3><font color="white" style="font-family: Arial, sans-serif;">Translação (Deslocamento)</font></h3>
+
+    <br>
+
+    <center><img src = "Soma.png" width="20%" height="20%"></center>
+
+    <p><font color="white" style="font-family: Arial, sans-serif;">A translação é uma transformação que desloca todos os pontos de um objeto por uma quantidade fixa em cada direção. Na SFML, isso é realizado através da matriz de transformação afim, onde os elementos (c, f) representam os deslocamentos em relação aos eixos x e y.</font></p>
+
+    <br>
+
+    <ul>
+        <li><font color="white" style="font-family: Arial, sans-serif;">Como funciona o cálculo: A translação adiciona um vetor de deslocamento (tx, ty) às coordenadas originais de cada vértice do objeto.</font></li>
+        <br>
+        <li><font color="white" style="font-family: Arial, sans-serif;">A matriz de translação: É representada por uma matriz onde os valores de deslocamento tx(horizontal) e ty(vertical) ocupam a última coluna da matriz de transformação.</font></li>
+        <br>
+        <li><font color="white" style="font-family: Arial, sans-serif;">Resultado prático: Ao multiplicar a matriz de translação pelo vetor homogêneo do ponto original, a nova coordenada x' torna-se a soma de x com tx, e a nova coordenada y' torna-se a soma de y com ty.</font></li>
+    </ul>
+
+<br>
+
+
+    <br>
+
+        <h3><font color="white" style="font-family: Arial, sans-serif;">Escala (Redimensionamento)</font></h3>
+
+        <p><font color="white" style="font-family: Arial, sans-serif;">A escala é a transformação que altera o tamanho de um objeto, podendo ampliá-lo, reduzí-lo ou até espelhá-lo em relação aos eixos.</font></p>
+
+    <ul>
+        <li><font color="white" style="font-family: Arial, sans-serif;">Como funciona o cálculo: A escala multiplica cada uma das coordenadas originais por um fator de dimensão. O fator Sx escala o objeto no eixo horizontal, enquanto o fator Sy escala no eixo vertical.</font></li>
+        <br>
+        <li><font color="white" style="font-family: Arial, sans-serif;">A matriz de escala: É uma matriz onde os fatores Sx e Sy ocupam a diagonal principal. Se os fatores forem maiores que 1, o objeto aumenta; se estiverem entre 0 e 1, o objeto diminui. Se um dos fatores for negativo, o objeto é refletido (espelhado) em relação ao respectivo eixo.</font></li>
+        <br>
+        <li><font color="white" style="font-family: Arial, sans-serif;">Resultado prático: A nova coordenada x' é obtida multiplicando x por Sx, e a nova coordenada y' é obtida multiplicando y por Sy.</font></li>
+    </ul>
+
+<br>
+
+<h3><font color="white" style="font-family: Arial, sans-serif;">Rotação(Giro)</font></h3>
+
+        <p><font color="white" style="font-family: Arial, sans-serif;">A rotação é a transformação que gira um objeto em torno de um ponto fixo, conhecido como centro de rotação.</font></p>
+
+    <ul>
+        <li><font color="white" style="font-family: Arial, sans-serif;">Como funciona o cálculo: A rotação utiliza uma matriz de rotação que depende do ângulo de rotação. Cada coordenada do objeto é transformada utilizando as funções trigonométricas seno e cosseno.</font></li>
+        <br>
+        <li><font color="white" style="font-family: Arial, sans-serif;">A matriz de rotação: É representada por uma matriz 2x2 onde os elementos são compostos por seno e cosseno do ângulo de rotação. O centro de rotação é geralmente o origem (0,0), mas pode ser ajustado.</font></li>
+        <br>
+        <li><font color="white" style="font-family: Arial, sans-serif;">Resultado prático: A nova coordenada x' é calculada como (<i>x</i> * Cosθ - <i>y</i> * Sinθ), e a nova coordenada y' é calculada como (<i>x</i> * Sinθ + <i>y</i> * Cosθ).</font></li>
+    </ul>
+
+<br>
+
+</body>
+</html>
