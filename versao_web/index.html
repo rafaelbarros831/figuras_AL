@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trabalho de Álgebra Linear - Figuras e Transformações</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Estilos gerais da pagina */
+:root {
+  --bg: #f8fafc;
+  --card: #ffffff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #cbd5e1;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --success: #16a34a;
+  --grid: #e2e8f0;
+  --axis: #475569;
+}
+
+body.dark-mode {
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f8fafc;
+  --text-muted: #94a3b8;
+  --border: #334155;
+  --primary: #38bdf8;
+  --primary-hover: #0ea5e9;
+  --success: #22c55e;
+  --grid: #1e293b;
+  --axis: #64748b;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  padding-bottom: 2rem;
+}
+
+header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 1.2rem 1.5rem;
+}
+.header-wrap {
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+h1 {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.4rem;
+  color: var(--text);
+}
+p.subtitle {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+main {
+  max-width: 1300px;
+  margin: 1.2rem auto;
+  padding: 0 1rem;
+}
+
+/* Abas */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.tab-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+}
+.tab-btn.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 1.2rem;
+}
+@media (max-width: 950px) {
+  .layout { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.section-box {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.85rem;
+}
+body.dark-mode .section-box {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+h2 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Botoes de ligar/desligar figuras */
+.figure-toggles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+}
+.toggle-btn {
+  padding: 0.45rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text-muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.15s;
+}
+.toggle-btn.on {
+  background: rgba(37, 99, 235, 0.1);
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
+.toggle-btn .indicator {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: #cbd5e1;
+}
+.toggle-btn.on .indicator {
+  background: var(--primary);
+}
+
+/* Seletor de alvo */
+.target-select {
+  width: 100%;
+  padding: 0.45rem;
+  border-radius: 5px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 0.82rem;
+  margin-top: 0.4rem;
+}
+
+/* Digitar Matriz */
+.matrix-input-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-bottom: 0.6rem;
+}
+.matrix-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.matrix-cell label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  width: 15px;
+}
+.matrix-cell input {
+  flex: 1;
+  padding: 0.4rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--card);
+  color: var(--text);
+  text-align: right;
+}
+
+.btn-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+}
+.btn-row-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.4rem;
+}
+
+button.btn {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+button.btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+button.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  font-weight: 600;
+}
+button.btn-primary:hover {
+  background: var(--primary-hover);
+  color: #fff;
+}
+button.btn-danger {
+  color: #dc2626;
+}
+button.btn-danger:hover {
+  border-color: #dc2626;
+  background: rgba(220, 38, 38, 0.05);
+}
+
+/* Sliders */
+.slider-group {
+  margin-bottom: 0.6rem;
+}
+.slider-group label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+input[type=range] {
+  width: 100%;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+/* Display da Matriz Atual */
+.matrix-display {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 0.6rem;
+  text-align: center;
+}
+.matrix-display .row {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+/* Canvas */
+.canvas-wrap {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+canvas {
+  width: 100%;
+  height: 600px;
+  border-radius: 6px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  cursor: crosshair;
+}
+.canvas-footer {
+  margin-top: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.color-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-wrap">
+    <div>
+      <h1>Trabalho de Álgebra Linear - Transformações e Figuras</h1>
+      <p class="subtitle">Multiplicação de matrizes aplicada em figuras geométricas 2D e 3D</p>
+    </div>
+    <div>
+      <button class="btn" id="btn-theme">🌓 Alternar Tema</button>
+      <button class="btn" id="btn-reset-all">↺ Reset Geral</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-2d">📐 Espaço 2D</button>
+    <button class="tab-btn" id="tab-3d">🧊 Cubo 3D</button>
+  </div>
+
+  <!-- ==================== TELA 2D ==================== -->
+  <div class="layout" id="view-2d">
+    <div class="panel">
+      <!-- LIGAR / DESLIGAR FIGURAS -->
+      <div class="section-box">
+        <h2>1. Quais figuras mostrar na tela:</h2>
+        <div class="figure-toggles">
+          <button class="toggle-btn on" id="toggle-quad" data-fig="quad"><span class="indicator"></span> Quadrado</button>
+          <button class="toggle-btn on" id="toggle-ret" data-fig="ret"><span class="indicator"></span> Retângulo</button>
+          <button class="toggle-btn on" id="toggle-tri" data-fig="tri"><span class="indicator"></span> Triângulo</button>
+          <button class="toggle-btn on" id="toggle-circ" data-fig="circ"><span class="indicator"></span> Círculo</button>
+          <button class="toggle-btn on" id="toggle-grade" data-fig="grade" style="grid-column: 1/-1;"><span class="indicator"></span> Grade de Quadrados</button>
+        </div>
+
+        <label style="display:block; margin-top:0.7rem; font-size:0.78rem; color:var(--text-muted);">
+          Aplicar transformações em:
+        </label>
+        <select class="target-select" id="target-shape">
+          <option value="quad">Quadrado</option>
+          <option value="ret">Retângulo</option>
+          <option value="tri">Triângulo</option>
+          <option value="circ">Círculo</option>
+          <option value="grade">Grade de Quadrados</option>
+          <option value="all">Todas as figuras visíveis</option>
+        </select>
+      </div>
+
+      <!-- DIGITAR MATRIZ MANUALMENTE -->
+      <div class="section-box">
+        <h2>2. Digitar Matriz M (2×2):</h2>
+        <div class="matrix-input-grid">
+          <div class="matrix-cell">
+            <label>a</label>
+            <input type="number" id="inp-a" step="0.1" value="1.0">
+          </div>
+          <div class="matrix-cell">
+            <label>b</label>
+            <input type="number" id="inp-b" step="0.1" value="0.0">
+          </div>
+          <div class="matrix-cell">
+            <label>c</label>
+            <input type="number" id="inp-c" step="0.1" value="0.0">
+          </div>
+          <div class="matrix-cell">
+            <label>d</label>
+            <input type="number" id="inp-d" step="0.1" value="1.0">
+          </div>
+        </div>
+        <button class="btn btn-primary" id="btn-apply-matrix" style="width:100%; margin-bottom:0.5rem;">
+          ✔ Aplicar Esta Matriz na Figura
+        </button>
+
+        <!-- Presets rapidos de matrizes de Álgebra Linear -->
+        <div style="font-size:0.72rem; color:var(--text-muted); margin-bottom:0.3rem;">Presets rápidos:</div>
+        <div class="btn-row" style="margin-bottom:0.4rem;">
+          <button class="btn" id="preset-id">Identidade</button>
+          <button class="btn" id="preset-reflx">Reflexão X</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn" id="preset-refly">Reflexão Y</button>
+          <button class="btn" id="preset-shear">Cisalhamento</button>
+        </div>
+      </div>
+
+      <!-- TRANSFORMACOES RAPIDAS POR SLIDERS -->
+      <div class="section-box">
+        <h2>3. Ajustes Rápidos:</h2>
+        <div class="slider-group">
+          <label>Escala Geral: <span id="val-scale">1.0x</span></label>
+          <input type="range" id="slider-scale" min="0.2" max="2.5" step="0.05" value="1">
+        </div>
+        <div class="slider-group">
+          <label>Rotação: <span id="val-rot">0°</span></label>
+          <input type="range" id="slider-rot" min="-180" max="180" step="5" value="0">
+        </div>
+        <div class="btn-row">
+          <button class="btn" id="btn-rot-m15">↺ -15°</button>
+          <button class="btn" id="btn-rot-p15">↻ +15°</button>
+        </div>
+      </div>
+
+      <!-- MOVIMENTO -->
+      <div class="section-box">
+        <h2>4. Mover Figura:</h2>
+        <div class="btn-row-3">
+          <div></div>
+          <button class="btn" id="btn-up">▲ Cima</button>
+          <div></div>
+          <button class="btn" id="btn-left">◄ Esq</button>
+          <button class="btn" id="btn-center">Centro</button>
+          <button class="btn" id="btn-right">Dir ►</button>
+          <div></div>
+          <button class="btn" id="btn-down">▼ Baixo</button>
+          <div></div>
+        </div>
+        <div style="font-size:0.72rem; color:var(--text-muted); text-align:center; margin-top:0.4rem;">
+          (Ou clique e arraste com o mouse no desenho)
+        </div>
+      </div>
+
+      <!-- MATRIZ ACUMULADA ATUAL -->
+      <div class="section-box">
+        <h2>Matriz Acumulada da Figura Ativa:</h2>
+        <div class="matrix-display" id="display-matrix">
+          <div class="row"><span id="dm-a">+1.00</span><span id="dm-b">+0.00</span></div>
+          <div class="row"><span id="dm-c">+0.00</span><span id="dm-d">+1.00</span></div>
+        </div>
+        <div style="font-size:0.75rem; color:var(--text-muted); margin-top:0.4rem; display:flex; justify-content:space-between;">
+          <span>det(M): <b id="dm-det">1.00</b></span>
+          <span id="dm-desc">Preserva área e orientação</span>
+        </div>
+        <button class="btn btn-danger" id="btn-reset-shape" style="width:100%; margin-top:0.6rem;">
+          ↺ Resetar Figura Ativa
+        </button>
+      </div>
+    </div>
+
+    <!-- CANVAS 2D -->
+    <div class="canvas-wrap">
+      <canvas id="canvas2d" width="850" height="600"></canvas>
+      <div class="canvas-footer">
+        <div>
+          <span class="legend-item"><span class="color-dot" style="background:#16a34a;"></span> Quadrado</span>
+          <span class="legend-item" style="margin-left:0.6rem;"><span class="color-dot" style="background:#dc2626;"></span> Retângulo</span>
+          <span class="legend-item" style="margin-left:0.6rem;"><span class="color-dot" style="background:#d97706;"></span> Triângulo</span>
+          <span class="legend-item" style="margin-left:0.6rem;"><span class="color-dot" style="background:#0284c7;"></span> Círculo</span>
+          <span class="legend-item" style="margin-left:0.6rem;"><span class="color-dot" style="background:#9333ea;"></span> Grade</span>
+        </div>
+        <div>
+          Dica: Use as setas do teclado para mover e <b>+</b> / <b>-</b> para escala
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TELA 3D (CUBO) ==================== -->
+  <div class="layout" id="view-3d" style="display:none;">
+    <div class="panel">
+      <div class="section-box">
+        <h2>1. Rotação do Cubo 3D nos Eixos:</h2>
+        <div class="slider-group">
+          <label>Eixo X (pitch): <span id="v3-rx">25°</span></label>
+          <input type="range" id="slider-rx" min="-180" max="180" value="25">
+        </div>
+        <div class="slider-group">
+          <label>Eixo Y (yaw): <span id="v3-ry">35°</span></label>
+          <input type="range" id="slider-ry" min="-180" max="180" value="35">
+        </div>
+        <div class="slider-group">
+          <label>Eixo Z (roll): <span id="v3-rz">0°</span></label>
+          <input type="range" id="slider-rz" min="-180" max="180" value="0">
+        </div>
+        <div class="btn-row" style="margin-top:0.4rem;">
+          <button class="btn" id="btn-spin3d">▶ Auto-Giro</button>
+          <button class="btn btn-danger" id="btn-reset-3d">↺ Resetar Cubo</button>
+        </div>
+      </div>
+
+      <div class="section-box">
+        <h2>2. Escala e Câmera 3D:</h2>
+        <div class="slider-group">
+          <label>Escala do Cubo: <span id="v3-scale">1.00x</span></label>
+          <input type="range" id="slider-s3" min="0.3" max="2.5" step="0.05" value="1">
+        </div>
+        <div class="slider-group">
+          <label>Distância da Câmera: <span id="v3-cam">450</span></label>
+          <input type="range" id="slider-cam" min="200" max="800" step="10" value="450">
+        </div>
+      </div>
+
+      <div class="section-box">
+        <h2>Matriz de Rotação R (3×3):</h2>
+        <div class="matrix-display" id="display-matrix3" style="font-size:0.75rem;">
+          <div class="row"><span id="m3-00">+1.00</span><span id="m3-01">+0.00</span><span id="m3-02">+0.00</span></div>
+          <div class="row"><span id="m3-10">+0.00</span><span id="m3-11">+1.00</span><span id="m3-12">+0.00</span></div>
+          <div class="row"><span id="m3-20">+0.00</span><span id="m3-21">+0.00</span><span id="m3-22">+1.00</span></div>
+        </div>
+        <div style="font-size:0.72rem; color:var(--text-muted); margin-top:0.4rem; text-align:center;">
+          v' = R_z · R_y · R_x · v
+        </div>
+      </div>
+    </div>
+
+    <!-- CANVAS 3D -->
+    <div class="canvas-wrap">
+      <canvas id="canvas3d" width="850" height="600"></canvas>
+      <div class="canvas-footer">
+        <div>
+          <span class="legend-item"><span class="color-dot" style="background:#ef4444;"></span> Eixo X</span>
+          <span class="legend-item" style="margin-left:0.6rem;"><span class="color-dot" style="background:#22c55e;"></span> Eixo Y</span>
+          <span class="legend-item" style="margin-left:0.6rem;"><span class="color-dot" style="background:#3b82f6;"></span> Eixo Z</span>
+          <span class="legend-item" style="margin-left:0.6rem;"><span class="color-dot" style="background:#f59e0b;"></span> Vértices (8 pontos)</span>
+        </div>
+        <div>
+          Clique e arraste com o mouse para orbitar livremente
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+// ==================== MATEMATICA E MATRIZES ====================
+// Multiplica duas matrizes 2x2: A * B
+function multMat2(A, B) {
+  return [
+    A[0]*B[0] + A[1]*B[2],  A[0]*B[1] + A[1]*B[3],
+    A[2]*B[0] + A[3]*B[2],  A[2]*B[1] + A[3]*B[3]
+  ];
+}
+
+// Aplica matriz 2x2 no ponto [x, y]
+function aplicarPonto2(M, p) {
+  return [
+    M[0]*p[0] + M[1]*p[1],
+    M[2]*p[0] + M[3]*p[1]
+  ];
+}
+
+// Matriz de rotacao 2D
+function matRot2(graus) {
+  const rad = graus * Math.PI / 180;
+  const c = Math.cos(rad), s = Math.sin(rad);
+  return [c, -s, s, c];
+}
+
+// Matriz de escala 2D
+function matEscala2(sx, sy) {
+  return [sx, 0, 0, sy];
+}
+
+// Determinante 2x2
+function detMat2(M) {
+  return M[0]*M[3] - M[1]*M[2];
+}
+
+// ==================== ESTADO DAS FIGURAS ====================
+// Cada figura tem sua visibilidade, posicao, matriz acumulada e pontos
+const estado = {
+  visivel: {
+    quad: true,
+    ret: true,
+    tri: true,
+    circ: true,
+    grade: true
+  },
+  alvo: 'quad',
+  pos: {
+    quad: [220, 200],
+    ret: [550, 190],
+    tri: [240, 430],
+    circ: [550, 430],
+    grade: [360, 80]
+  },
+  matriz: {
+    quad: [1, 0, 0, 1],
+    ret: [1, 0, 0, 1],
+    tri: [1, 0, 0, 1],
+    circ: [1, 0, 0, 1],
+    grade: [1, 0, 0, 1]
+  }
+};
+
+// Geometrias base (centradas na origem)
+const formasBase = {
+  quad: [[-45, -45], [45, -45], [45, 45], [-45, 45]],
+  ret:  [[-65, -35], [65, -35], [65, 35], [-65, 35]],
+  tri:  [[0, -50], [-50, 45], [50, 45]],
+  circRaio: 45,
+  gradeLinhas: 4,
+  gradeColunas: 4,
+  gradeTamanho: 22,
+  gradeEspaco: 8
+};
+
+const cv2 = document.getElementById('canvas2d');
+const ctx2 = cv2.getContext('2d');
+
+// Formata numero para texto bonitinho
+function fmt(n) {
+  if (Math.abs(n) < 0.005) return '+0.00';
+  return (n >= 0 ? '+' : '') + n.toFixed(2);
+}
+
+// Atualiza o display da matriz na tela
+function atualizarDisplayMatriz() {
+  const alvo = estado.alvo === 'all' ? 'quad' : estado.alvo;
+  const M = estado.matriz[alvo];
+  document.getElementById('dm-a').textContent = fmt(M[0]);
+  document.getElementById('dm-b').textContent = fmt(M[1]);
+  document.getElementById('dm-c').textContent = fmt(M[2]);
+  document.getElementById('dm-d').textContent = fmt(M[3]);
+
+  // Coloca tambem nos inputs para facilitar edicao
+  document.getElementById('inp-a').value = M[0].toFixed(2);
+  document.getElementById('inp-b').value = M[1].toFixed(2);
+  document.getElementById('inp-c').value = M[2].toFixed(2);
+  document.getElementById('inp-d').value = M[3].toFixed(2);
+
+  const d = detMat2(M);
+  document.getElementById('dm-det').textContent = d.toFixed(2);
+  const desc = document.getElementById('dm-desc');
+  if (Math.abs(d) < 0.01) {
+    desc.textContent = 'Degenerada (área 0)';
+    desc.style.color = '#ef4444';
+  } else if (d < 0) {
+    desc.textContent = 'Inverte orientação (reflexão)';
+    desc.style.color = '#d97706';
+  } else {
+    desc.textContent = 'Preserva orientação';
+    desc.style.color = 'var(--text-muted)';
+  }
+}
+
+// Aplica uma transformacao matricial na figura ativa
+function aplicarMatriz(M_nova) {
+  if (estado.alvo === 'all') {
+    for (const key of ['quad', 'ret', 'tri', 'circ', 'grade']) {
+      if (estado.visivel[key]) {
+        estado.matriz[key] = multMat2(M_nova, estado.matriz[key]);
+      }
+    }
+  } else {
+    estado.matriz[estado.alvo] = multMat2(M_nova, estado.matriz[estado.alvo]);
+  }
+  atualizarDisplayMatriz();
+  desenhar2D();
+}
+
+// Define diretamente a matriz digitada pelo usuario
+function setarMatrizDigitada(M_digitada) {
+  if (estado.alvo === 'all') {
+    for (const key of ['quad', 'ret', 'tri', 'circ', 'grade']) {
+      if (estado.visivel[key]) estado.matriz[key] = [...M_digitada];
+    }
+  } else {
+    estado.matriz[estado.alvo] = [...M_digitada];
+  }
+  atualizarDisplayMatriz();
+  desenhar2D();
+}
+
+// Desenho no Canvas 2D
+function desenhar2D() {
+  ctx2.clearRect(0, 0, cv2.width, cv2.height);
+
+  // Eixos centrais cartesianos
+  ctx2.strokeStyle = getComputedStyle(document.body).getPropertyValue('--border').trim() || '#cbd5e1';
+  ctx2.lineWidth = 1;
+  ctx2.beginPath();
+  ctx2.moveTo(0, cv2.height / 2); ctx2.lineTo(cv2.width, cv2.height / 2);
+  ctx2.moveTo(cv2.width / 2, 0); ctx2.lineTo(cv2.width / 2, cv2.height);
+  ctx2.stroke();
+
+  // 1. Quadrado (Verde)
+  if (estado.visivel.quad) {
+    desenharPoligono(formasBase.quad, estado.pos.quad, estado.matriz.quad, '#16a34a', 'rgba(22, 163, 74, 0.2)', estado.alvo === 'quad');
+  }
+
+  // 2. Retangulo (Vermelho)
+  if (estado.visivel.ret) {
+    desenharPoligono(formasBase.ret, estado.pos.ret, estado.matriz.ret, '#dc2626', 'rgba(220, 38, 38, 0.2)', estado.alvo === 'ret');
+  }
+
+  // 3. Triangulo (Amarelo/Laranja)
+  if (estado.visivel.tri) {
+    desenharPoligono(formasBase.tri, estado.pos.tri, estado.matriz.tri, '#d97706', 'rgba(217, 119, 6, 0.2)', estado.alvo === 'tri');
+  }
+
+  // 4. Circulo (Azul)
+  if (estado.visivel.circ) {
+    desenharCirculo(formasBase.circRaio, estado.pos.circ, estado.matriz.circ, '#0284c7', 'rgba(2, 132, 199, 0.2)', estado.alvo === 'circ');
+  }
+
+  // 5. Grade de Quadrados (Roxo)
+  if (estado.visivel.grade) {
+    desenharGrade(formasBase.gradeLinhas, formasBase.gradeColunas, formasBase.gradeTamanho, formasBase.gradeEspaco, estado.pos.grade, estado.matriz.grade, '#9333ea', 'rgba(147, 51, 234, 0.15)', estado.alvo === 'grade');
+  }
+}
+
+function desenharPoligono(pontos, centro, M, corBorda, corFundo, ehAlvo) {
+  ctx2.beginPath();
+  pontos.forEach((p, i) => {
+    const tp = aplicarPonto2(M, p);
+    const sx = centro[0] + tp[0];
+    const sy = centro[1] + tp[1];
+    if (i === 0) ctx2.moveTo(sx, sy);
+    else ctx2.lineTo(sx, sy);
+  });
+  ctx2.closePath();
+  ctx2.fillStyle = corFundo;
+  ctx2.fill();
+  ctx2.lineWidth = ehAlvo ? 2.5 : 1.5;
+  ctx2.strokeStyle = ehAlvo ? '#000' : corBorda;
+  ctx2.stroke();
+
+  // Pontinhos nos vertices
+  pontos.forEach(p => {
+    const tp = aplicarPonto2(M, p);
+    ctx2.beginPath();
+    ctx2.arc(centro[0] + tp[0], centro[1] + tp[1], ehAlvo ? 4 : 3, 0, Math.PI * 2);
+    ctx2.fillStyle = corBorda;
+    ctx2.fill();
+  });
+}
+
+function desenharCirculo(raio, centro, M, corBorda, corFundo, ehAlvo) {
+  // Gera circulo aproximado por vertices para sofrer cisalhamento/escala correta
+  const passos = 40;
+  const pts = [];
+  for (let i = 0; i < passos; i++) {
+    const ang = (i / passos) * Math.PI * 2;
+    pts.push([raio * Math.cos(ang), raio * Math.sin(ang)]);
+  }
+  desenharPoligono(pts, centro, M, corBorda, corFundo, ehAlvo);
+
+  // Centro
+  ctx2.beginPath();
+  ctx2.arc(centro[0], centro[1], 3.5, 0, Math.PI * 2);
+  ctx2.fillStyle = corBorda;
+  ctx2.fill();
+}
+
+function desenharGrade(linhas, cols, tam, espaco, centro, M, corBorda, corFundo, ehAlvo) {
+  const passo = tam + espaco;
+  const largTotal = cols * passo - espaco;
+  const altTotal = linhas * passo - espaco;
+  const offX = -largTotal / 2;
+  const offY = -altTotal / 2;
+
+  for (let r = 0; r < linhas; r++) {
+    for (let c = 0; c < cols; c++) {
+      const x0 = offX + c * passo;
+      const y0 = offY + r * passo;
+      const quadrado = [
+        [x0, y0], [x0 + tam, y0], [x0 + tam, y0 + tam], [x0, y0 + tam]
+      ];
+      desenharPoligono(quadrado, centro, M, corBorda, corFundo, ehAlvo);
+    }
+  }
+}
+
+// BOTOES DE LIGAR / DESLIGAR FIGURAS
+document.querySelectorAll('.toggle-btn').forEach(btn => {
+  btn.onclick = () => {
+    const fig = btn.getAttribute('data-fig');
+    estado.visivel[fig] = !estado.visivel[fig];
+    btn.classList.toggle('on', estado.visivel[fig]);
+    desenhar2D();
+  };
+});
+
+// SELECAO DO ALVO DA MATRIZ
+const targetSelect = document.getElementById('target-shape');
+targetSelect.onchange = () => {
+  estado.alvo = targetSelect.value;
+  atualizarDisplayMatriz();
+  desenhar2D();
+};
+
+// APLICAR MATRIZ DIGITADA PELO USUARIO
+document.getElementById('btn-apply-matrix').onclick = () => {
+  const a = parseFloat(document.getElementById('inp-a').value) || 0;
+  const b = parseFloat(document.getElementById('inp-b').value) || 0;
+  const c = parseFloat(document.getElementById('inp-c').value) || 0;
+  const d = parseFloat(document.getElementById('inp-d').value) || 0;
+  setarMatrizDigitada([a, b, c, d]);
+};
+
+// PRESETS DE MATRIZES
+document.getElementById('preset-id').onclick = () => {
+  setarMatrizDigitada([1, 0, 0, 1]);
+};
+document.getElementById('preset-reflx').onclick = () => {
+  aplicarMatriz([1, 0, 0, -1]);
+};
+document.getElementById('preset-refly').onclick = () => {
+  aplicarMatriz([-1, 0, 0, 1]);
+};
+document.getElementById('preset-shear').onclick = () => {
+  aplicarMatriz([1, 0.5, 0, 1]);
+};
+
+// SLIDERS RAPIDOS
+let escalaAnterior = 1;
+document.getElementById('slider-scale').oninput = (e) => {
+  const val = parseFloat(e.target.value);
+  document.getElementById('val-scale').textContent = val.toFixed(2) + 'x';
+  const fator = val / escalaAnterior;
+  escalaAnterior = val;
+  aplicarMatriz(matEscala2(fator, fator));
+};
+
+let anguloAnterior = 0;
+document.getElementById('slider-rot').oninput = (e) => {
+  const val = parseFloat(e.target.value);
+  document.getElementById('val-rot').textContent = val + '°';
+  const delta = val - anguloAnterior;
+  anguloAnterior = val;
+  aplicarMatriz(matRot2(delta));
+};
+
+document.getElementById('btn-rot-m15').onclick = () => aplicarMatriz(matRot2(-15));
+document.getElementById('btn-rot-p15').onclick = () => aplicarMatriz(matRot2(15));
+
+// MOVIMENTO (D-PAD)
+const PASSO_MOVE = 25;
+function moverAlvo(dx, dy) {
+  const alvos = estado.alvo === 'all' ? ['quad', 'ret', 'tri', 'circ', 'grade'] : [estado.alvo];
+  alvos.forEach(k => {
+    estado.pos[k][0] += dx;
+    estado.pos[k][1] += dy;
+  });
+  desenhar2D();
+}
+
+document.getElementById('btn-up').onclick = () => moverAlvo(0, -PASSO_MOVE);
+document.getElementById('btn-down').onclick = () => moverAlvo(0, PASSO_MOVE);
+document.getElementById('btn-left').onclick = () => moverAlvo(-PASSO_MOVE, 0);
+document.getElementById('btn-right').onclick = () => moverAlvo(PASSO_MOVE, 0);
+document.getElementById('btn-center').onclick = () => {
+  const alvo = estado.alvo === 'all' ? 'quad' : estado.alvo;
+  estado.pos[alvo] = [cv2.width / 2, cv2.height / 2];
+  desenhar2D();
+};
+
+// RESET DA FIGURA ATIVA
+document.getElementById('btn-reset-shape').onclick = () => {
+  const alvos = estado.alvo === 'all' ? ['quad', 'ret', 'tri', 'circ', 'grade'] : [estado.alvo];
+  alvos.forEach(k => {
+    estado.matriz[k] = [1, 0, 0, 1];
+  });
+  document.getElementById('slider-scale').value = 1;
+  document.getElementById('val-scale').textContent = '1.0x';
+  escalaAnterior = 1;
+  document.getElementById('slider-rot').value = 0;
+  document.getElementById('val-rot').textContent = '0°';
+  anguloAnterior = 0;
+  atualizarDisplayMatriz();
+  desenhar2D();
+};
+
+// ARRASTAR COM O MOUSE NO CANVAS 2D
+let arrastando = false;
+let figArrastada = null;
+let mouseInicio = [0, 0];
+let posInicio = [0, 0];
+
+cv2.onmousedown = (e) => {
+  const rect = cv2.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+
+  // Descobre figura mais proxima para arrastar
+  const chave = estado.alvo === 'all' ? 'quad' : estado.alvo;
+  figArrastada = chave;
+  arrastando = true;
+  mouseInicio = [mx, my];
+  posInicio = [...estado.pos[chave]];
+};
+
+window.onmousemove = (e) => {
+  if (!arrastando || !figArrastada) return;
+  const rect = cv2.getBoundingClientRect();
+  const mx = e.clientX - rect.left;
+  const my = e.clientY - rect.top;
+  estado.pos[figArrastada][0] = posInicio[0] + (mx - mouseInicio[0]);
+  estado.pos[figArrastada][1] = posInicio[1] + (my - mouseInicio[1]);
+  desenhar2D();
+};
+
+window.onmouseup = () => {
+  arrastando = false;
+};
+
+// ==================== PARTE 3D (CUBO) ====================
+const cv3 = document.getElementById('canvas3d');
+const ctx3 = cv3.getContext('2d');
+
+const verticesCubo = [
+  [-1, -1, -1], [ 1, -1, -1], [ 1,  1, -1], [-1,  1, -1],
+  [-1, -1,  1], [ 1, -1,  1], [ 1,  1,  1], [-1,  1,  1]
+];
+const arestasCubo = [
+  [0, 1], [1, 2], [2, 3], [3, 0],
+  [4, 5], [5, 6], [6, 7], [7, 4],
+  [0, 4], [1, 5], [2, 6], [3, 7]
+];
+
+let ax3 = 25, ay3 = 35, az3 = 0, s3 = 1, camDist3 = 5.0, fov3 = 450;
+let autoSpin = false, spinTimer = null;
+
+function rotX3(g) { const t=g*Math.PI/180, c=Math.cos(t), s=Math.sin(t); return [1,0,0, 0,c,-s, 0,s,c]; }
+function rotY3(g) { const t=g*Math.PI/180, c=Math.cos(t), s=Math.sin(t); return [c,0,s, 0,1,0, -s,0,c]; }
+function rotZ3(g) { const t=g*Math.PI/180, c=Math.cos(t), s=Math.sin(t); return [c,-s,0, s,c,0, 0,0,1]; }
+function multMat3(A, B) {
+  const R = new Array(9).fill(0);
+  for(let i=0;i<3;i++) for(let j=0;j<3;j++) for(let k=0;k<3;k++) R[i*3+j]+=A[i*3+k]*B[k*3+j];
+  return R;
+}
+function aplicarPonto3(M, p) {
+  return [
+    M[0]*p[0] + M[1]*p[1] + M[2]*p[2],
+    M[3]*p[0] + M[4]*p[1] + M[5]*p[2],
+    M[6]*p[0] + M[7]*p[1] + M[8]*p[2]
+  ];
+}
+
+function projetar3D(p) {
+  const z = p[2] + camDist3;
+  const f = fov3 / (z < 0.2 ? 0.2 : z);
+  return [cv3.width / 2 + p[0] * f, cv3.height / 2 - p[1] * f];
+}
+
+function desenhar3D() {
+  ctx3.clearRect(0, 0, cv3.width, cv3.height);
+
+  const R = multMat3(multMat3(rotZ3(az3), rotY3(ay3)), rotX3(ax3));
+
+  // Atualiza display da matriz 3x3
+  for(let i=0; i<3; i++) {
+    for(let j=0; j<3; j++) {
+      const el = document.getElementById(`m3-${i}${j}`);
+      if (el) el.textContent = fmt(R[i*3+j]);
+    }
+  }
+
+  // Desenha eixos X, Y, Z
+  const orig = projetar3D([0, 0, 0]);
+  const eixos = { x: [1.8, 0, 0], y: [0, 1.8, 0], z: [0, 0, 1.8] };
+  const coresEixo = { x: '#ef4444', y: '#22c55e', z: '#3b82f6' };
+
+  ['x', 'y', 'z'].forEach(k => {
+    const tip = projetar3D(aplicarPonto3(R, eixos[k]));
+    ctx3.strokeStyle = coresEixo[k];
+    ctx3.lineWidth = 2.5;
+    ctx3.beginPath();
+    ctx3.moveTo(orig[0], orig[1]);
+    ctx3.lineTo(tip[0], tip[1]);
+    ctx3.stroke();
+  });
+
+  // Desenha arestas do cubo
+  const ptsProj = verticesCubo.map(v => {
+    const pTransformado = aplicarPonto3(R, [v[0]*s3, v[1]*s3, v[2]*s3]);
+    return projetar3D(pTransformado);
+  });
+
+  ctx3.strokeStyle = '#38bdf8';
+  ctx3.lineWidth = 2;
+  arestasCubo.forEach(([i, j]) => {
+    ctx3.beginPath();
+    ctx3.moveTo(ptsProj[i][0], ptsProj[i][1]);
+    ctx3.lineTo(ptsProj[j][0], ptsProj[j][1]);
+    ctx3.stroke();
+  });
+
+  // Vertices do cubo
+  ptsProj.forEach(p => {
+    ctx3.beginPath();
+    ctx3.arc(p[0], p[1], 4.5, 0, Math.PI * 2);
+    ctx3.fillStyle = '#f59e0b';
+    ctx3.fill();
+    ctx3.strokeStyle = '#fff';
+    ctx3.lineWidth = 1;
+    ctx3.stroke();
+  });
+}
+
+// Sliders 3D
+document.getElementById('slider-rx').oninput = (e) => { ax3 = parseFloat(e.target.value); document.getElementById('v3-rx').textContent = ax3+'°'; desenhar3D(); };
+document.getElementById('slider-ry').oninput = (e) => { ay3 = parseFloat(e.target.value); document.getElementById('v3-ry').textContent = ay3+'°'; desenhar3D(); };
+document.getElementById('slider-rz').oninput = (e) => { az3 = parseFloat(e.target.value); document.getElementById('v3-rz').textContent = az3+'°'; desenhar3D(); };
+document.getElementById('slider-s3').oninput = (e) => { s3 = parseFloat(e.target.value); document.getElementById('v3-scale').textContent = s3.toFixed(2)+'x'; desenhar3D(); };
+document.getElementById('slider-cam').oninput = (e) => { fov3 = parseFloat(e.target.value); document.getElementById('v3-cam').textContent = fov3; desenhar3D(); };
+
+document.getElementById('btn-spin3d').onclick = (e) => {
+  autoSpin = !autoSpin;
+  e.target.textContent = autoSpin ? '⏸ Pausar Giro' : '▶ Auto-Giro';
+  if (autoSpin) {
+    spinTimer = setInterval(() => {
+      ay3 = (ay3 + 1.2) % 360;
+      document.getElementById('slider-ry').value = Math.round(ay3);
+      document.getElementById('v3-ry').textContent = Math.round(ay3)+'°';
+      desenhar3D();
+    }, 30);
+  } else {
+    clearInterval(spinTimer);
+  }
+};
+
+document.getElementById('btn-reset-3d').onclick = () => {
+  ax3 = 25; ay3 = 35; az3 = 0; s3 = 1; fov3 = 450;
+  document.getElementById('slider-rx').value = 25; document.getElementById('v3-rx').textContent = '25°';
+  document.getElementById('slider-ry').value = 35; document.getElementById('v3-ry').textContent = '35°';
+  document.getElementById('slider-rz').value = 0; document.getElementById('v3-rz').textContent = '0°';
+  document.getElementById('slider-s3').value = 1; document.getElementById('v3-scale').textContent = '1.00x';
+  desenhar3D();
+};
+
+// Arrasto no Canvas 3D para orbitar
+let arrastando3D = false;
+let mouse3DInicio = [0, 0];
+let ang3DInicio = [0, 0];
+
+cv3.onmousedown = (e) => {
+  arrastando3D = true;
+  mouse3DInicio = [e.clientX, e.clientY];
+  ang3DInicio = [ax3, ay3];
+};
+window.addEventListener('mousemove', (e) => {
+  if (!arrastando3D) return;
+  const dx = e.clientX - mouse3DInicio[0];
+  const dy = e.clientY - mouse3DInicio[1];
+  ay3 = (ang3DInicio[1] + dx * 0.6) % 360;
+  ax3 = (ang3DInicio[0] + dy * 0.6) % 360;
+  document.getElementById('slider-rx').value = Math.round(ax3);
+  document.getElementById('slider-ry').value = Math.round(ay3);
+  document.getElementById('v3-rx').textContent = Math.round(ax3) + '°';
+  document.getElementById('v3-ry').textContent = Math.round(ay3) + '°';
+  desenhar3D();
+});
+window.addEventListener('mouseup', () => { arrastando3D = false; });
+
+// ==================== CONTROLE DE ABAS E TEMA ====================
+document.getElementById('tab-2d').onclick = () => {
+  document.getElementById('tab-2d').classList.add('active');
+  document.getElementById('tab-3d').classList.remove('active');
+  document.getElementById('view-2d').style.display = 'grid';
+  document.getElementById('view-3d').style.display = 'none';
+  desenhar2D();
+};
+document.getElementById('tab-3d').onclick = () => {
+  document.getElementById('tab-3d').classList.add('active');
+  document.getElementById('tab-2d').classList.remove('active');
+  document.getElementById('view-3d').style.display = 'grid';
+  document.getElementById('view-2d').style.display = 'none';
+  desenhar3D();
+};
+
+document.getElementById('btn-theme').onclick = () => {
+  document.body.classList.toggle('dark-mode');
+  setTimeout(() => { desenhar2D(); desenhar3D(); }, 40);
+};
+
+document.getElementById('btn-reset-all').onclick = () => {
+  location.reload();
+};
+
+// Inicializacao
+atualizarDisplayMatriz();
+desenhar2D();
+desenhar3D();
+</script>
+</body>
+</html>
