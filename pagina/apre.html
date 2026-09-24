@@ -1,115 +1,345 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apresentação</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Apresentação — AL: Vetores e Matrizes</title>
+<style>
+  :root{
+    --bg: #000033;
+    --panel: #000a4d;
+    --cyan: #4de8ff;
+    --text: #f2f4ff;
+    --text-dim: #b9c2e8;
+    --rule: #1f2d70;
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap{
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+  header{
+    border-bottom: 2px solid var(--rule);
+    padding-bottom: 20px;
+    margin-bottom: 32px;
+  }
+  h1{
+    color: var(--cyan);
+    font-size: 2rem;
+    margin: 0 0 6px;
+  }
+  h1 small{
+    display:block;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    font-weight: normal;
+    margin-top: 6px;
+  }
+  h3{
+    color: var(--cyan);
+    font-size: 1.2rem;
+    margin: 40px 0 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+  p{ margin: 0 0 14px; }
+  ul, ol{ margin: 0 0 18px; padding-left: 22px; }
+  li{ margin-bottom: 10px; }
+  b{ color: var(--cyan); }
+  figure{
+    margin: 24px 0;
+    text-align: center;
+  }
+  figure img{
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    background: #fff;
+    border-radius: 6px;
+    padding: 12px;
+  }
+  figcaption{
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-top: 8px;
+  }
+  nav a{
+    color: var(--cyan);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  nav a:hover{ text-decoration: underline; }
+  .toc{
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 16px 22px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+  }
+  .toc a{ color: var(--cyan); text-decoration: none; }
+  .toc a:hover{ text-decoration: underline; }
+  .toc ol{ margin: 8px 0 0; padding-left: 20px; }
+  .toc li{ margin-bottom: 4px; }
+  .matriz{
+    display: inline-grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 2px 14px;
+    border-left: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+    padding: 6px 12px;
+    font-family: "Cambria Math", Georgia, serif;
+    font-size: 1.05rem;
+    vertical-align: middle;
+  }
+  .matriz3{ grid-template-columns: repeat(3, auto); }
+  .matriz span{ text-align: center; }
+  .math-row{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 10px 0 18px;
+    font-family: "Cambria Math", Georgia, serif;
+    font-size: 1.05rem;
+  }
+  .math-row .op{ font-size: 1.3rem; color: var(--text-dim); }
+  .vetor{
+    display: inline-grid;
+    grid-template-rows: repeat(2, auto);
+    gap: 2px;
+    border-left: 2px solid var(--cyan);
+    border-right: 2px solid var(--cyan);
+    padding: 6px 10px;
+  }
+  .vetor3{ grid-template-rows: repeat(3, auto); }
+  .box-conceito{
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  .box-conceito p:last-child{ margin-bottom: 0; }
+</style>
 </head>
-<body bgcolor="#000080">
+<body>
+<div class="wrap">
 
-    <h1><font color="cyan" style="font-family: Arial, sans-serif;" align="left">FrameWorks e mais...</font></h1>
-    <br>
+  <header>
+    <nav><a href="index.html">&larr; Voltar para a página do projeto</a></nav>
+    <h1>FrameWorks e mais...
+      <small>SFML · C++ · Álgebra Linear aplicada à computação gráfica</small>
+    </h1>
+    <ul>
+      <li>SFML</li>
+      <li>C++</li>
+    </ul>
+  </header>
 
-        <ul>
-            <li><font color="white" style="font-family: Arial, sans-serif;">SFML</font></li>
-            <br>
-            <li><font color="white" style="font-family: Arial, sans-serif;">C++</font></li>
-            <br>
-        </ul>
-
-    <h3><font color="white" style="font-family: Arial, sans-serif;">Como a SFML Funciona:</font></h3>
-    
-    <p><font color="white" style="font-family: Arial, sans-serif;">A SFML abstrai a complexidade do hardware gráfico (via OpenGL) e organiza a aplicação em cinco módulos principais: System, Window, Graphics, Audio e Network.</font></p>
-    <p align="justify"><font color="white" style="font-family: Arial, sans-serif;"><b>Game Loop:</b> A aplicação executa em um laço contínuo estruturado em três etapas:</p>
-
+  <nav class="toc">
+    Nesta página:
     <ol>
-        <li><font color="white" style="font-family: Arial, sans-serif;">Processamento de Eventos: Captura de entradas de teclado, mouse e janela.</font></li>
-        <br>
-        <li><font color="white" style="font-family: Arial, sans-serif;">Atualização do Estado (Update): Aplicação de transformações geométricas, física e lógica de negócios.</font></li>
-        <br>
-        <li><font color="white" style="font-family: Arial, sans-serif;">Renderização (Render): Limpeza do buffer (window.clear()), desenho dos objetos (window.draw()) e troca de buffers de renderização (window.display()).</font></li>
+      <li><a href="#fundamentos">Fundamentos matemáticos</a></li>
+      <li><a href="#sfml">Como a SFML funciona</a></li>
+      <li><a href="#al-sfml">Álgebra linear aplicada na SFML</a></li>
+      <li><a href="#transformacoes">Translação, escala e rotação</a></li>
+      <li><a href="#arquitetura">Documentação do projeto (arquitetura em C++)</a></li>
     </ol>
+  </nav>
 
-    <br>
+  <section id="fundamentos">
+    <h3>Fundamentos Matemáticos</h3>
 
-    <h3><font color="white" style="font-family: Arial, sans-serif;">Conceitos de Álgebra Linear Aplicados na <b>SFML</b>:</font></h3>
+    <p><b>Ponto como vetor.</b> Todo ponto do plano (x, y) pode ser tratado como um vetor-coluna. É essa representação que permite manipulá-lo com as operações da álgebra linear:</p>
+    <div class="math-row">
+      P = <span class="vetor"><span>x</span><span>y</span></span>
+    </div>
 
-    <p><font color="white" style="font-family: Arial, sans-serif;">A SFML utiliza internamente a estrutura sf::Transform, que representa uma matriz de transformação afim 3 x 3 para manipular objetos no espaço 2D.</font></p>
-    <p><font color="white" style="font-family: Arial, sans-serif;">Essa matriz permite realizar operações como translação, rotação e escala sobre os objetos. Para aplicar rotação, escala e translação utilizando multiplicações de matrizes, a SFML utiliza coordenadas homogêneas. Um ponto 2D (x, y) é estendido para um vetor 3D(x, y, 1) transposto.</font></p>
-    <p><font color="white" style="font-family: Arial, sans-serif;">A matriz geral de transformação afim na SFML é estruturada da seguinte forma:</font></p>
-    <br>
+    <p><b>Transformação linear.</b> Uma transformação T: &#8477;&sup2; &rarr; &#8477;&sup2; é <i>linear</i> quando pode ser escrita como o produto de uma matriz A por um vetor v, ou seja, T(v) = A&middot;v. Ela é chamada de linear porque preserva somas e múltiplos escalares: T(u + v) = T(u) + T(v) e T(k&middot;v) = k&middot;T(v). É exatamente essa propriedade que garante que retas continuem retas e que a origem nunca se mova, depois de qualquer rotação, escala ou reflexão.</p>
 
-    <center><img src = "Matr.png" width="10%" height="10%"></center>
+    <p><b>Multiplicação matriz&times;vetor.</b> É a operação central de todo o projeto: cada linha da matriz é combinada (produto interno) com o vetor de entrada para gerar uma coordenada de saída.</p>
+    <div class="math-row">
+      <span class="matriz"><span>a</span><span>b</span><span>c</span><span>d</span></span>
+      <span class="op">&middot;</span>
+      <span class="vetor"><span>x</span><span>y</span></span>
+      <span class="op">=</span>
+      <span class="vetor"><span>ax + by</span><span>cx + dy</span></span>
+    </div>
 
-    <br>
+    <p><b>Composição de transformações.</b> Aplicar uma transformação B e, em seguida, uma transformação A a um ponto equivale a multiplicar as duas matrizes e aplicar o resultado de uma vez: (A&middot;B)v = A(Bv). Por isso o projeto consegue acumular várias transformações numa única matriz. Um detalhe importante: multiplicação de matrizes <b>não é comutativa</b> — girar e depois escalar não é, em geral, o mesmo que escalar e depois girar (A&middot;B &ne; B&middot;A).</p>
 
-    <p><font color="white" style="font-family: Arial, sans-serif;">Onde:</font></p>
+    <p><b>Determinante.</b> Para uma matriz 2&times;2, det(A) = ad &minus; bc. Ele tem dois significados geométricos usados o tempo todo nas transformações do projeto:</p>
+    <div class="box-conceito">
+      <p><b>|det(A)|</b> é o fator pelo qual a transformação multiplica áreas — dobrar a escala (fator 2 em x e y) dá det = 4, ou seja, a área quadruplica.</p>
+      <p><b>O sinal de det(A)</b> indica se a orientação da figura foi preservada (positivo) ou invertida — como acontece nas reflexões, cujo determinante é sempre negativo.</p>
+    </div>
+
+    <p><b>Rotação como matriz ortogonal.</b> A matriz de rotação satisfaz cos²θ + sen²θ = 1, o que faz det = 1 e garante que a rotação nunca altera o tamanho nem os ângulos da figura — ela só gira.</p>
+  </section>
+
+  <section id="sfml">
+    <h3>Como a SFML Funciona</h3>
+    <p>A SFML abstrai a complexidade do hardware gráfico (via OpenGL) e organiza a aplicação em cinco módulos principais: System, Window, Graphics, Audio e Network.</p>
+    <p><b>Game Loop:</b> a aplicação executa em um laço contínuo estruturado em três etapas:</p>
+    <ol>
+      <li>Processamento de Eventos: captura de entradas de teclado, mouse e janela.</li>
+      <li>Atualização do Estado (Update): aplicação de transformações geométricas, física e lógica de negócios.</li>
+      <li>Renderização (Render): limpeza do buffer (<code>window.clear()</code>), desenho dos objetos (<code>window.draw()</code>) e troca de buffers de renderização (<code>window.display()</code>).</li>
+    </ol>
+  </section>
+
+  <section>
+    <h3 id="al-sfml">Conceitos de Álgebra Linear Aplicados na SFML</h3>
+    <p>A SFML utiliza internamente a estrutura <code>sf::Transform</code>, que representa uma matriz de transformação afim 3&times;3 para manipular objetos no espaço 2D.</p>
+    <p>Essa matriz permite realizar operações como translação, rotação e escala sobre os objetos. Para aplicar rotação, escala e translação utilizando multiplicações de matrizes, a SFML utiliza coordenadas homogêneas. Um ponto 2D (x, y) é estendido para um vetor 3D (x, y, 1) transposto.</p>
+    <p>A matriz geral de transformação afim na SFML é estruturada da seguinte forma:</p>
+    <figure>
+      <img src="Matr.png" alt="Matriz de transformação afim 3x3 usada pela SFML">
+    </figure>
+    <p>Onde:</p>
     <ul>
-        <li><font color="white" style="font-family: Arial, sans-serif;">(c, f) representam os deslocamentos de translação.</font></li>
-        <br>
-        <li><font color="white" style="font-family: Arial, sans-serif;">A submatriz 2 x 2  superior esquerda (a, b, d, e) combina escala, rotação e cisalhamento. </font></li>
-        <br>
-        
+      <li>(c, f) representam os deslocamentos de translação.</li>
+      <li>A submatriz 2&times;2 superior esquerda (a, b, d, e) combina escala, rotação e cisalhamento.</li>
     </ul>
+  </section>
 
-    <br>
+  <section>
+    <h3 id="transformacoes">As Transformações Geométricas 2D</h3>
+    <p>No desenvolvimento gráfico com C++ e SFML, qualquer alteração visual na posição, tamanho ou orientação de um objeto na tela é realizada por meio de transformações geométricas afins. Na álgebra linear, essas transformações usam matrizes para mapear as coordenadas originais de um vetor de vértices para novas posições no espaço bidimensional. Para que todas essas operações possam ser combinadas através de simples multiplicações de matrizes, a SFML utiliza o conceito de coordenadas homogêneas, onde um ponto no plano 2D representado por (x, y) passa a ser tratado como um vetor tridimensional (x, y, 1).</p>
+  </section>
 
-    <h3><font color="white" style="font-family: Arial, sans-serif;">As Transformações Geométricas 2D</font></h3>
-
-    <p><font color="white" style="font-family: Arial, sans-serif;">No desenvolvimento gráfico com C++ e SFML, qualquer alteração visual na posição, tamanho ou orientação de um objeto na tela é realizada por meio de transformações geométricas afins. Na álgebra linear, essas transformações usam matrizes para mapear as coordenadas originais de um vetor de vértices para novas posições no espaço bidimensional.Para que todas essas operações possam ser combinadas através de simples multiplicações de matrizes, a SFML utiliza o conceito de coordenadas homogêneas, onde um ponto no plano 2D representado por (x, y) passa a ser tratado como um vetor tridimensional (x, y, 1).</font></p>
-
-    <br>
-
-    <h3><font color="white" style="font-family: Arial, sans-serif;">Translação (Deslocamento)</font></h3>
-
-    <br>
-
-    <center><img src = "Soma.png" width="20%" height="20%"></center>
-
-    <p><font color="white" style="font-family: Arial, sans-serif;">A translação é uma transformação que desloca todos os pontos de um objeto por uma quantidade fixa em cada direção. Na SFML, isso é realizado através da matriz de transformação afim, onde os elementos (c, f) representam os deslocamentos em relação aos eixos x e y.</font></p>
-
-    <br>
-
+  <section>
+    <h3>Translação (Deslocamento)</h3>
+    <figure>
+      <img src="Soma.png" alt="Soma vetorial que representa a translação">
+    </figure>
+    <p>A translação é uma transformação que desloca todos os pontos de um objeto por uma quantidade fixa em cada direção. Na SFML, isso é realizado através da matriz de transformação afim, onde os elementos (c, f) representam os deslocamentos em relação aos eixos x e y.</p>
     <ul>
-        <li><font color="white" style="font-family: Arial, sans-serif;">Como funciona o cálculo: A translação adiciona um vetor de deslocamento (tx, ty) às coordenadas originais de cada vértice do objeto.</font></li>
-        <br>
-        <li><font color="white" style="font-family: Arial, sans-serif;">A matriz de translação: É representada por uma matriz onde os valores de deslocamento tx(horizontal) e ty(vertical) ocupam a última coluna da matriz de transformação.</font></li>
-        <br>
-        <li><font color="white" style="font-family: Arial, sans-serif;">Resultado prático: Ao multiplicar a matriz de translação pelo vetor homogêneo do ponto original, a nova coordenada x' torna-se a soma de x com tx, e a nova coordenada y' torna-se a soma de y com ty.</font></li>
+      <li><b>Como funciona o cálculo:</b> a translação adiciona um vetor de deslocamento (tx, ty) às coordenadas originais de cada vértice do objeto.</li>
+      <li><b>A matriz de translação:</b> é representada por uma matriz onde os valores de deslocamento tx (horizontal) e ty (vertical) ocupam a última coluna da matriz de transformação.</li>
+      <li><b>Resultado prático:</b> ao multiplicar a matriz de translação pelo vetor homogêneo do ponto original, a nova coordenada x' torna-se a soma de x com tx, e a nova coordenada y' torna-se a soma de y com ty.</li>
     </ul>
+  </section>
 
-<br>
-
-
-    <br>
-
-        <h3><font color="white" style="font-family: Arial, sans-serif;">Escala (Redimensionamento)</font></h3>
-
-        <p><font color="white" style="font-family: Arial, sans-serif;">A escala é a transformação que altera o tamanho de um objeto, podendo ampliá-lo, reduzí-lo ou até espelhá-lo em relação aos eixos.</font></p>
-
+  <section>
+    <h3>Escala (Redimensionamento)</h3>
+    <p>A escala é a transformação que altera o tamanho de um objeto, podendo ampliá-lo, reduzi-lo ou até espelhá-lo em relação aos eixos.</p>
     <ul>
-        <li><font color="white" style="font-family: Arial, sans-serif;">Como funciona o cálculo: A escala multiplica cada uma das coordenadas originais por um fator de dimensão. O fator Sx escala o objeto no eixo horizontal, enquanto o fator Sy escala no eixo vertical.</font></li>
-        <br>
-        <li><font color="white" style="font-family: Arial, sans-serif;">A matriz de escala: É uma matriz onde os fatores Sx e Sy ocupam a diagonal principal. Se os fatores forem maiores que 1, o objeto aumenta; se estiverem entre 0 e 1, o objeto diminui. Se um dos fatores for negativo, o objeto é refletido (espelhado) em relação ao respectivo eixo.</font></li>
-        <br>
-        <li><font color="white" style="font-family: Arial, sans-serif;">Resultado prático: A nova coordenada x' é obtida multiplicando x por Sx, e a nova coordenada y' é obtida multiplicando y por Sy.</font></li>
+      <li><b>Como funciona o cálculo:</b> a escala multiplica cada uma das coordenadas originais por um fator de dimensão. O fator Sx escala o objeto no eixo horizontal, enquanto o fator Sy escala no eixo vertical.</li>
+      <li><b>A matriz de escala:</b> é uma matriz onde os fatores Sx e Sy ocupam a diagonal principal. Se os fatores forem maiores que 1, o objeto aumenta; se estiverem entre 0 e 1, o objeto diminui. Se um dos fatores for negativo, o objeto é refletido (espelhado) em relação ao respectivo eixo.</li>
+      <li><b>Resultado prático:</b> a nova coordenada x' é obtida multiplicando x por Sx, e a nova coordenada y' é obtida multiplicando y por Sy.</li>
     </ul>
+    <div class="math-row">
+      <span class="matriz"><span>Sx</span><span>0</span><span>0</span><span>Sy</span></span>
+      <span class="op">&middot;</span>
+      <span class="vetor"><span>x</span><span>y</span></span>
+      <span class="op">=</span>
+      <span class="vetor"><span>Sx&middot;x</span><span>Sy&middot;y</span></span>
+    </div>
+    <p>O determinante dessa matriz é Sx&middot;Sy: é exatamente o fator pelo qual a área da figura aumenta ou diminui. Quando Sx ou Sy é negativo, o determinante fica negativo — a escala passa a incluir uma reflexão.</p>
+  </section>
 
-<br>
-
-<h3><font color="white" style="font-family: Arial, sans-serif;">Rotação(Giro)</font></h3>
-
-        <p><font color="white" style="font-family: Arial, sans-serif;">A rotação é a transformação que gira um objeto em torno de um ponto fixo, conhecido como centro de rotação.</font></p>
-
+  <section>
+    <h3>Rotação (Giro)</h3>
+    <p>A rotação é a transformação que gira um objeto em torno de um ponto fixo, conhecido como centro de rotação.</p>
     <ul>
-        <li><font color="white" style="font-family: Arial, sans-serif;">Como funciona o cálculo: A rotação utiliza uma matriz de rotação que depende do ângulo de rotação. Cada coordenada do objeto é transformada utilizando as funções trigonométricas seno e cosseno.</font></li>
-        <br>
-        <li><font color="white" style="font-family: Arial, sans-serif;">A matriz de rotação: É representada por uma matriz 2x2 onde os elementos são compostos por seno e cosseno do ângulo de rotação. O centro de rotação é geralmente o origem (0,0), mas pode ser ajustado.</font></li>
-        <br>
-        <li><font color="white" style="font-family: Arial, sans-serif;">Resultado prático: A nova coordenada x' é calculada como (<i>x</i> * Cosθ - <i>y</i> * Sinθ), e a nova coordenada y' é calculada como (<i>x</i> * Sinθ + <i>y</i> * Cosθ).</font></li>
+      <li><b>Como funciona o cálculo:</b> a rotação utiliza uma matriz de rotação que depende do ângulo de rotação. Cada coordenada do objeto é transformada utilizando as funções trigonométricas seno e cosseno.</li>
+      <li><b>A matriz de rotação:</b> é representada por uma matriz 2&times;2 onde os elementos são compostos por seno e cosseno do ângulo de rotação. O centro de rotação é geralmente a origem (0,0), mas pode ser ajustado.</li>
+      <li><b>Resultado prático:</b> a nova coordenada x' é calculada como (<i>x</i>&middot;cos&theta; &minus; <i>y</i>&middot;sen&theta;), e a nova coordenada y' é calculada como (<i>x</i>&middot;sen&theta; + <i>y</i>&middot;cos&theta;).</li>
     </ul>
+    <div class="math-row">
+      <span class="matriz"><span>cos&theta;</span><span>&minus;sen&theta;</span><span>sen&theta;</span><span>cos&theta;</span></span>
+      <span class="op">&middot;</span>
+      <span class="vetor"><span>x</span><span>y</span></span>
+      <span class="op">=</span>
+      <span class="vetor"><span>x&middot;cos&theta; &minus; y&middot;sen&theta;</span><span>x&middot;sen&theta; + y&middot;cos&theta;</span></span>
+    </div>
+    <p>Como cos²θ + sen²θ = 1, o determinante dessa matriz é sempre 1: a rotação nunca aumenta, diminui ou espelha a figura — apenas gira em torno do centro.</p>
+  </section>
 
-<br>
+  <header id="arquitetura" style="margin-top:56px;">
+    <p class="eyebrow">Documentação do projeto</p>
+    <h1 style="font-size:1.6rem;">Arquitetura em C++: como as matrizes viram figuras na tela</h1>
+  </header>
 
+  <section>
+    <h3>Visão geral</h3>
+    <p>O projeto (pasta <code>projeto_configurado/</code>) segue uma separação simples entre <b>álgebra</b>, <b>geometria</b> e <b>controle</b>:</p>
+    <ul>
+      <li><b>Álgebra</b> — <code>Ponto</code>/<code>Matriz</code> (2D) e <code>Ponto3D</code>/<code>Matriz3</code> (3D) sabem apenas multiplicar vetores por matrizes.</li>
+      <li><b>Geometria</b> — <code>Figura</code> e suas subclasses (<code>Quadrado</code>, <code>Retangulo</code>, <code>Triangulo</code>, <code>Circulo</code>, <code>GradeQuadrados</code>, <code>Cubo</code>) guardam os vértices de cada forma.</li>
+      <li><b>Fábricas de transformação</b> — <code>Transformacao</code> e <code>Transformacao3D</code> constroem, prontas, as matrizes de escala, rotação e reflexão.</li>
+      <li><b>Controle</b> — <code>App</code> liga tudo: lê cliques e teclas, chama a fábrica de matrizes certa e manda a figura ativa se redesenhar.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Ponto e Matriz: a base da álgebra 2D</h3>
+    <p><code>Ponto</code> guarda apenas <code>x</code> e <code>y</code>. <code>Matriz</code> guarda quatro números — <code>a, b, c, d</code> — e sabe fazer duas coisas: aplicar-se a um <code>Ponto</code> e compor-se com outra <code>Matriz</code>.</p>
+    <ul>
+      <li><b>aplicar(ponto):</b> calcula <code>x' = a&middot;x + b&middot;y</code> e <code>y' = c&middot;x + d&middot;y</code> — a multiplicação matriz&times;vetor de uma matriz 2&times;2.</li>
+      <li><b>operator*:</b> multiplica duas matrizes 2&times;2, permitindo compor transformações (ex.: rotacionar e depois escalar em uma única matriz).</li>
+      <li><b>identidade():</b> devolve <code>a=1, b=0, c=0, d=1</code>, a transformação que não altera nada.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h3>Figura: onde as transformações acontecem</h3>
+    <p><code>Figura</code> é a classe-base de <code>Quadrado</code>, <code>Retangulo</code> e <code>Triangulo</code>; todas guardam sua forma como uma lista de <code>Ponto</code>. Ela oferece duas formas de aplicar uma matriz:</p>
+    <ul>
+      <li><b>aplicarMatriz(matriz):</b> transforma cada vértice em relação à origem (0,0) — útil para reflexões e escalas que devem partir do canto do desenho.</li>
+      <li><b>aplicarMatrizCentrada(matriz):</b> calcula o centro da figura, translada até a origem, aplica a matriz e translada de volta. É assim que o programa consegue <i>rotacionar e escalar cada figura em torno do seu próprio centro</i>, em vez de fazê-la "pular" para longe da tela.</li>
+      <li><b>transladar(dx, dy):</b> move todos os pontos, usado para arrastar a figura com o mouse ou pelo teclado — a translação não é uma multiplicação de matriz aqui, é soma direta nas coordenadas.</li>
+    </ul>
+    <p><code>Circulo</code> não guarda pontos: como um círculo é sempre igual em qualquer direção, ele só precisa de centro e raio, e sua "escala" soma um valor ao raio em vez de multiplicar uma matriz. <code>GradeQuadrados</code> guarda vários <code>Quadrado</code> e aplica a mesma matriz centrada a cada um, formando o efeito de grade que se transforma em conjunto.</p>
+  </section>
+
+  <section>
+    <h3>Transformacao: a fábrica de matrizes prontas</h3>
+    <p>A classe <code>Transformacao</code> não guarda estado — ela só devolve a matriz 2&times;2 correspondente a cada operação, com o ângulo já convertido de graus para radianos quando necessário:</p>
+    <table style="width:100%; border-collapse:collapse; margin: 16px 0 20px; font-size:0.92rem;">
+      <thead>
+        <tr style="border-bottom:1px solid var(--rule); text-align:left;">
+          <th style="padding:6px 10px 6px 0; color:var(--cyan);">Método</th>
+          <th style="padding:6px 10px; color:var(--cyan);">Matriz gerada (a, b, c, d)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:6px 10px 6px 0;"><code>escala(fator)</code></td><td style="padding:6px 10px;">(fator, 0, 0, fator)</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:6px 10px 6px 0;"><code>reflexaoX()</code></td><td style="padding:6px 10px;">(1, 0, 0, &minus;1)</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:6px 10px 6px 0;"><code>reflexaoY()</code></td><td style="padding:6px 10px;">(&minus;1, 0, 0, 1)</td></tr>
+        <tr style="border-bottom:1px solid var(--rule);"><td style="padding:6px 10px 6px 0;"><code>reflexaoOrigem()</code></td><td style="padding:6px 10px;">(&minus;1, 0, 0, &minus;1)</td></tr>
+        <tr><td style="padding:6px 10px 6px 0;"><code>rotacao(&aacute;ngulo)</code></td><td style="padding:6px 10px;">(cos&theta;, &minus;sen&theta;, sen&theta;, cos&theta;)</td></tr>
+      </tbody>
+    </table>
+    <p>O <code>App</code> chama um desses métodos conforme o botão ou tecla pressionada, e passa a matriz resultante para <code>figura.aplicarMatrizCentrada(matriz)</code>.</p>
+  </section>
+
+  <section>
+    <h3>Extensão para 3D: o Cubo</h3>
+    <p>A mesma ideia se repete em três dimensões: <code>Ponto3D</code> guarda (x, y, z), <code>Matriz3</code> é 3&times;3 e <code>Cubo</code> guarda 8 vértices e 12 arestas. <code>Transformacao3D</code> gera as matrizes de escala e de rotação em torno de cada eixo:</p>
+    <ul>
+      <li><b>rotacaoX:</b> mantém x fixo e gira y/z com seno e cosseno.</li>
+      <li><b>rotacaoY:</b> mantém y fixo e gira x/z.</li>
+      <li><b>rotacaoZ:</b> mantém z fixo e gira x/y — a mesma fórmula 2D, só que aplicada ao plano XY dentro do espaço 3D.</li>
+    </ul>
+    <p>O <code>Cubo</code> não tem "aplicarMatrizCentrada" porque já nasce centrado na origem (seus 8 vértices vão de &minus;h a +h em cada eixo), então rotacionar em torno da origem já rotaciona em torno do seu próprio centro.</p>
+  </section>
+
+  <section>
+    <h3>App: o controlador que junta tudo</h3>
+    <p>A classe <code>App</code> é a única que conhece a janela SFML, os botões da interface e o teclado. Ela guarda qual figura está selecionada (<code>TipoFigura</code>) e, a cada ação do usuário, chama a matriz correspondente — por exemplo <code>aplicarRotacao2D(15)</code> monta <code>Transformacao::rotacao(15)</code> e aplica na figura ativa — além de manter <code>matrizAcumulada2D</code>/<code>matrizAcumulada3D</code>, que multiplicam as matrizes aplicadas em sequência para mostrar ao usuário qual é a transformação total já feita na figura.</p>
+  </section>
+
+</div>
 </body>
 </html>

@@ -34,6 +34,13 @@ body.dark-mode {
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
+*:focus {
+  outline: none;
+}
+*:focus-visible {
+  outline: 1.5px solid var(--axis);
+  outline-offset: 1px;
+}
 body {
   background: var(--bg);
   color: var(--text);
@@ -107,31 +114,27 @@ main {
 .panel {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1.2rem;
+  border-radius: 10px;
+  padding: 1.3rem 1.3rem 0.3rem;
   display: flex;
   flex-direction: column;
   gap: 1.1rem;
 }
 
 .section-box {
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.85rem;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid var(--border);
 }
-body.dark-mode .section-box {
-  background: rgba(255, 255, 255, 0.02);
+.section-box:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
 h2 {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.7rem;
   color: var(--text);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 /* Botoes de ligar/desligar figuras */
@@ -155,9 +158,9 @@ h2 {
   transition: all 0.15s;
 }
 .toggle-btn.on {
-  background: rgba(37, 99, 235, 0.1);
+  background: var(--primary);
   border-color: var(--primary);
-  color: var(--primary);
+  color: #fff;
   font-weight: 600;
 }
 .toggle-btn .indicator {
@@ -167,7 +170,7 @@ h2 {
   background: #cbd5e1;
 }
 .toggle-btn.on .indicator {
-  background: var(--primary);
+  background: #fff;
 }
 
 /* Seletor de alvo */
@@ -294,7 +297,7 @@ input[type=range] {
 .canvas-wrap {
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -337,16 +340,16 @@ canvas {
       <p class="subtitle">Multiplicação de matrizes aplicada em figuras geométricas 2D e 3D</p>
     </div>
     <div>
-      <button class="btn" id="btn-theme">🌓 Alternar Tema</button>
-      <button class="btn" id="btn-reset-all">↺ Reset Geral</button>
+      <button class="btn" id="btn-theme">Tema</button>
+      <button class="btn" id="btn-reset-all">Reiniciar tudo</button>
     </div>
   </div>
 </header>
 
 <main>
   <div class="tabs">
-    <button class="tab-btn active" id="tab-2d">📐 Espaço 2D</button>
-    <button class="tab-btn" id="tab-3d">🧊 Cubo 3D</button>
+    <button class="tab-btn active" id="tab-2d">Espaço 2D</button>
+    <button class="tab-btn" id="tab-3d">Cubo 3D</button>
   </div>
 
   <!-- ==================== TELA 2D ==================== -->
@@ -354,7 +357,7 @@ canvas {
     <div class="panel">
       <!-- LIGAR / DESLIGAR FIGURAS -->
       <div class="section-box">
-        <h2>1. Quais figuras mostrar na tela:</h2>
+        <h2>Figuras visíveis</h2>
         <div class="figure-toggles">
           <button class="toggle-btn on" id="toggle-quad" data-fig="quad"><span class="indicator"></span> Quadrado</button>
           <button class="toggle-btn on" id="toggle-ret" data-fig="ret"><span class="indicator"></span> Retângulo</button>
@@ -378,7 +381,7 @@ canvas {
 
       <!-- DIGITAR MATRIZ MANUALMENTE -->
       <div class="section-box">
-        <h2>2. Digitar Matriz M (2×2):</h2>
+        <h2>Matriz M (2×2)</h2>
         <div class="matrix-input-grid">
           <div class="matrix-cell">
             <label>a</label>
@@ -398,7 +401,7 @@ canvas {
           </div>
         </div>
         <button class="btn btn-primary" id="btn-apply-matrix" style="width:100%; margin-bottom:0.5rem;">
-          ✔ Aplicar Esta Matriz na Figura
+          Aplicar matriz
         </button>
 
         <!-- Presets rapidos de matrizes de Álgebra Linear -->
@@ -415,7 +418,7 @@ canvas {
 
       <!-- TRANSFORMACOES RAPIDAS POR SLIDERS -->
       <div class="section-box">
-        <h2>3. Ajustes Rápidos:</h2>
+        <h2>Ajustes rápidos</h2>
         <div class="slider-group">
           <label>Escala Geral: <span id="val-scale">1.0x</span></label>
           <input type="range" id="slider-scale" min="0.2" max="2.5" step="0.05" value="1">
@@ -432,7 +435,7 @@ canvas {
 
       <!-- MOVIMENTO -->
       <div class="section-box">
-        <h2>4. Mover Figura:</h2>
+        <h2>Mover figura</h2>
         <div class="btn-row-3">
           <div></div>
           <button class="btn" id="btn-up">▲ Cima</button>
@@ -451,7 +454,7 @@ canvas {
 
       <!-- MATRIZ ACUMULADA ATUAL -->
       <div class="section-box">
-        <h2>Matriz Acumulada da Figura Ativa:</h2>
+        <h2>Matriz acumulada</h2>
         <div class="matrix-display" id="display-matrix">
           <div class="row"><span id="dm-a">+1.00</span><span id="dm-b">+0.00</span></div>
           <div class="row"><span id="dm-c">+0.00</span><span id="dm-d">+1.00</span></div>
@@ -461,7 +464,7 @@ canvas {
           <span id="dm-desc">Preserva área e orientação</span>
         </div>
         <button class="btn btn-danger" id="btn-reset-shape" style="width:100%; margin-top:0.6rem;">
-          ↺ Resetar Figura Ativa
+          Reiniciar figura
         </button>
       </div>
     </div>
@@ -488,7 +491,7 @@ canvas {
   <div class="layout" id="view-3d" style="display:none;">
     <div class="panel">
       <div class="section-box">
-        <h2>1. Rotação do Cubo 3D nos Eixos:</h2>
+        <h2>Rotação nos eixos</h2>
         <div class="slider-group">
           <label>Eixo X (pitch): <span id="v3-rx">25°</span></label>
           <input type="range" id="slider-rx" min="-180" max="180" value="25">
@@ -502,13 +505,13 @@ canvas {
           <input type="range" id="slider-rz" min="-180" max="180" value="0">
         </div>
         <div class="btn-row" style="margin-top:0.4rem;">
-          <button class="btn" id="btn-spin3d">▶ Auto-Giro</button>
-          <button class="btn btn-danger" id="btn-reset-3d">↺ Resetar Cubo</button>
+          <button class="btn" id="btn-spin3d">Girar automaticamente</button>
+          <button class="btn btn-danger" id="btn-reset-3d">Reiniciar cubo</button>
         </div>
       </div>
 
       <div class="section-box">
-        <h2>2. Escala e Câmera 3D:</h2>
+        <h2>Escala e câmera</h2>
         <div class="slider-group">
           <label>Escala do Cubo: <span id="v3-scale">1.00x</span></label>
           <input type="range" id="slider-s3" min="0.3" max="2.5" step="0.05" value="1">
@@ -1027,7 +1030,7 @@ document.getElementById('slider-cam').oninput = (e) => { fov3 = parseFloat(e.tar
 
 document.getElementById('btn-spin3d').onclick = (e) => {
   autoSpin = !autoSpin;
-  e.target.textContent = autoSpin ? '⏸ Pausar Giro' : '▶ Auto-Giro';
+  e.target.textContent = autoSpin ? 'Pausar giro' : 'Girar automaticamente';
   if (autoSpin) {
     spinTimer = setInterval(() => {
       ay3 = (ay3 + 1.2) % 360;

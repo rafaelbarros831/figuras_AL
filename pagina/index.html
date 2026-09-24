@@ -1,36 +1,177 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AL-Vetores e Matrizes</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Atividade 5 — Transformação de Figuras | AL: Vetores e Matrizes</title>
+<style>
+  :root{
+    --bg: #000033;
+    --panel: #000a4d;
+    --cyan: #4de8ff;
+    --text: #f2f4ff;
+    --text-dim: #b9c2e8;
+    --rule: #1f2d70;
+  }
+  *{ box-sizing: border-box; }
+  body{
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+  }
+  .wrap{
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  .hero{
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .hero img{
+    max-width: 220px;
+    width: 60%;
+    height: auto;
+  }
+  h1{
+    color: var(--cyan);
+    font-size: 1.9rem;
+    text-align: center;
+    margin: 4px 0 4px;
+  }
+  .eyebrow{
+    text-align: center;
+    color: var(--text-dim);
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
+  h2{
+    color: var(--cyan);
+    font-size: 1.25rem;
+    margin: 44px 0 14px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+  }
+  p{ margin: 0 0 14px; }
+  ul{ margin: 0 0 18px; padding-left: 22px; }
+  li{ margin-bottom: 8px; }
+  .card{
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 22px 24px;
+  }
+  .download{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 18px 22px;
+    margin-bottom: 18px;
+  }
+  .download img{ width: 36px; height: 36px; flex-shrink: 0; }
+  .download a{
+    color: var(--cyan);
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.05rem;
+  }
+  .download a:hover{ text-decoration: underline; }
+  .download span{
+    display: block;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    margin-top: 2px;
+  }
+  .note{
+    border-left: 3px solid var(--cyan);
+    padding: 4px 16px;
+    color: var(--text-dim);
+    font-size: 0.92rem;
+    margin-bottom: 18px;
+  }
+  .links a{
+    color: var(--cyan);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .links a:hover{ text-decoration: underline; }
+  .links li{
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 14px 18px;
+    list-style: none;
+  }
+  .links ul{ padding-left: 0; display: grid; gap: 12px; }
+</style>
 </head>
-<body bgcolor="#000080">
- <br>
-    <center><img src = "Formas.png" width="20%" height="20%"></center>
-<br>
-    <center><h2><font color="cyan" style="font-family: Arial, sans-serif;">AL-Vetores e Matrizes gráficas</font></h2></center>
-    
-<br>
+<body>
+<div class="wrap">
 
-<img src = "seta.png" width="10%" height="10%" alt="Download" title="Download"><p><font color="white" style="font-family: Arial, sans-serif;">Clique aqui para baixar:</font></p> <a href="Gerador_matrizesq.zip" download="Gerador_matrizesq.zip">Gerador de Matrizes
-</a>
+  <div class="hero">
+    <img src="Formas.png" alt="Figuras geométricas — quadrado, triângulo, círculo">
+  </div>
 
-<br>
-<br>
+  <p class="eyebrow">Atividade 5 — Álgebra Linear</p>
+  <h1>Transformação de Figuras: Matrizes e Transformações Geométricas</h1>
 
-<p><font color="white" style="font-family: Arial, sans-serif;""><b>Importante:</b> O arquivo Gerador de matrizes.exe só irá funcionar na sua máquina se estiver na mesma pasta que os seus aquivos .dll. Caso contrário, o programa não encontrará os arquivos que foram compilados junto com ele e falhará na execução.</font></p>
+  <section class="card">
+    <p><b>Tema:</b> matrizes e transformações geométricas.</p>
+    <p><b>Conteúdo trabalhado:</b></p>
+    <ul>
+      <li>Matrizes aplicadas à geometria;</li>
+      <li>Rotação;</li>
+      <li>Escala;</li>
+      <li>Reflexão.</li>
+    </ul>
+    <p>O programa apresenta figuras simples (quadrado, retângulo, triângulo e círculo) e permite ao usuário aumentar ou diminuir, rotacionar e refletir cada figura. Todas as transformações são calculadas por meio de operações matriciais, conforme os conceitos detalhados na apresentação do trabalho.</p>
+  </section>
 
-<br>
+  <h2>Baixe o programa</h2>
+  <div class="download">
+    <img src="seta.png" alt="Ícone de download">
+    <div>
+      <a href="Gerador_matrizesq.zip" download="Gerador_matrizesq.zip">Gerador de Matrizes (C++ / SFML)</a>
+      <span>Versão desktop do programa, com figuras 2D e cubo 3D</span>
+    </div>
+  </div>
+  <p class="note"><b>Importante:</b> o arquivo <code>Gerador de matrizes.exe</code> só funciona se estiver na mesma pasta dos arquivos <code>.dll</code> que o acompanham. Fora dessa pasta, o programa não encontra os arquivos compilados junto com ele e falha na execução.</p>
 
-<h3><font color="white" style="font-family: Arial, sans-serif;">Mais Informações...</font></h3>
+  <h2>Conceitos matemáticos</h2>
+  <div class="card">
+    <p>Toda transformação do programa é uma <b>transformação linear</b> T(v) = A&middot;v: uma matriz A multiplicada pelo vetor-ponto (x, y).</p>
+    <ul>
+      <li><b>Escala:</b> matriz diagonal (Sx, Sy) — o determinante Sx&middot;Sy é o fator de variação da área da figura.</li>
+      <li><b>Rotação:</b> matriz com seno e cosseno do ângulo — determinante sempre 1, preserva tamanho e ângulos.</li>
+      <li><b>Reflexão:</b> matriz diagonal com algum fator negativo — determinante negativo, inverte a orientação da figura.</li>
+      <li><b>Composição:</b> aplicar duas transformações em sequência equivale a multiplicar as duas matrizes; a ordem da multiplicação importa.</li>
+    </ul>
+    <p style="margin-bottom:0;">A dedução completa de cada fórmula está nos <a href="apre.html#fundamentos" style="color:var(--cyan);">fundamentos matemáticos</a> da apresentação.</p>
+  </div>
 
-<br>
+  <h2>Arquitetura do projeto</h2>
+  <div class="card">
+    <p>O código em <code>projeto_configurado/</code> separa a álgebra da geometria:</p>
+    <ul>
+      <li><b>Ponto</b> e <b>Matriz</b> (2D), <b>Ponto3D</b> e <b>Matriz3</b> (3D) — só sabem multiplicar vetor por matriz.</li>
+      <li><b>Figura</b> e as formas <b>Quadrado</b>, <b>Retângulo</b>, <b>Triângulo</b>, <b>Círculo</b>, <b>GradeQuadrados</b> e <b>Cubo</b> — guardam os vértices de cada figura e sabem aplicar uma matriz em torno do próprio centro.</li>
+      <li><b>Transformacao</b> e <b>Transformacao3D</b> — geram, prontas, as matrizes de escala, reflexão e rotação.</li>
+      <li><b>App</b> — o controlador: liga cliques e teclas às matrizes certas e redesenha a figura ativa.</li>
+    </ul>
+    <p style="margin-bottom:0;">Detalhes de cada classe, com as matrizes exatas usadas no código, estão na <a href="apre.html#arquitetura" style="color:var(--cyan);">documentação completa da arquitetura</a>.</p>
+  </div>
 
-<a href="apre.html" target="_blank">Apresetaçao do trabalho
-</a>
+  <h2>Mais informações</h2>
+  <ul class="links">
+    <li><a href="apre.html">Apresentação do trabalho</a> — SFML, C++ e a álgebra linear por trás das transformações</li>
+    <li><a href="versao_web/index.html">Versão web interativa</a> — teste rotação, escala e reflexão direto no navegador</li>
+  </ul>
 
-<br>
-
+</div>
 </body>
 </html>
